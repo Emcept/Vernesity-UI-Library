@@ -3811,7 +3811,7 @@ function Vernesity:Window(title1, title2, Theme, DragNumber)
 					Value1.Parent = Drop_Button
 					local Value2 = Instance.new('StringValue')
 					Value2.Value = 'X'
-					Value2.Parent = Text
+					Value2.Parent = Text2
 					Drop_Button.Parent = Objects
 					Drop_Button.MouseEnter:Connect(function()
 						Tween(Text2, .5, style, dir, {
