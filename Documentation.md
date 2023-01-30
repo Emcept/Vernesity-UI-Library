@@ -7,6 +7,7 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Emcept/Vernesity-UI-Library/main/source.lua"))()
 ```
 <br />
+
 ## Creating a Window
 ```
 local Window = Library:Window(<Title>, <Game Name>, <Theme (optional)>)
