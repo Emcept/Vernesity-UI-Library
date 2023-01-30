@@ -133,6 +133,7 @@ Library:AddTheme("AwfulTheme", {
 	SecondaryElementColor = Color3.fromRGB(236, 236, 104)
 })
 local Window = Library:Window("Vernesity", "Game Name", "AwfulTheme")
+```
 
 ### If you want to change the theme, there are 2 ways to do it:
 ```
