@@ -132,10 +132,12 @@ local Keybind = Section:Keybind(<Keybind Name>, <Keybind Description>, <Default 
 
 
 ## Other Functions
+<br /><br />
 ### Getting the current Window's theme
 ```
 local theme = Window:GetTheme()
 ```
+<br />
 
 ### Adding themes
 #### There are 2 ways to add themes:
