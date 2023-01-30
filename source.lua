@@ -193,7 +193,7 @@ function Vernesity:Window(title1, title2, Theme)
 		return ThemeTable
 	end
 	theme = SetTheme(theme)
-	function Vernesity:GetTheme()
+	function Windows:GetTheme()
 		return theme
 	end
 	local function enableRippleEffect(v, m)
