@@ -29,7 +29,7 @@ local Window = Library:Window(<Title>, <Game Name>, <Theme (optional)>)
 ```
 Window:Notify(<Title>, <Description>, <Arguments Table>, <Duration>, <Func>)
 ```
-### The arguments table should be 0-2 strings or 0-2 numbers, if you want to use images instead of normal buttons
+### The arguments table should be 0-2 strings or 0-2 numbers if you want to use images instead of normal buttons
 ### For example, this would create a notification with 2 Buttons
 ```
 Window:Notify("Question", "Do you like this UI Library?", {"Yes", "No"}, 5, function(Text)
