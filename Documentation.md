@@ -52,3 +52,5 @@ local Label = Section:Label(<Label Name>)
 ## Creating TextBoxes
 ```
 local TextBox = Section:TextBox(<TextBox Name>, <TextBox Description>, <Default Text>, <Function>)
+```
+<br />
