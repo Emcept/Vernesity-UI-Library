@@ -133,7 +133,24 @@ Library:AddTheme("AwfulTheme", {
 	SecondaryElementColor = Color3.fromRGB(236, 236, 104)
 })
 local Window = Library:Window("Vernesity", "Game Name", "AwfulTheme")
+
+### If you want to change the theme, there are 2 ways to do it:
 ```
+Window:ChangeTheme(<theme>)
+```
+#### or
+```
+Window:Edit("Title", "Game Name", <theme>)
+```
+<br />
+
+### Changing the transparency of the DropShadow (it's set to 1 by default, so it's invisible)
+```
+Windows:SetShadowTransparency(<Number 0-1>)
+```
+
+
+
 
 ## Editing UI Elements:
 ```
