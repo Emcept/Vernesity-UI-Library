@@ -1,6 +1,9 @@
+-- // Vernesity UI Library // -- 
+-- // Made by Emmy#4846 // --
+
 local Vernesity = {}
 
-local Themes = {
+Vernesity.Themes = {
 	DarkTheme = {
 		TextColor = Color3.fromRGB(235, 235, 235),
 		WindowColor = Color3.fromRGB(44, 47, 49),
@@ -14,11 +17,46 @@ local Themes = {
 		TabColor = Color3.fromRGB(215, 230, 239),
 		ElementColor = Color3.fromRGB(207, 217, 229),
 		SecondaryElementColor = Color3.fromRGB(123, 191, 255)
+	},
+	PurpleTheme = {
+		TextColor = Color3.fromRGB(235, 235, 235),
+		WindowColor = Color3.fromRGB(42, 27, 49),
+		TabColor = Color3.fromRGB(62, 39, 71),
+		ElementColor = Color3.fromRGB(87, 55, 100),
+		SecondaryElementColor = Color3.fromRGB(185, 104, 236)
+	},
+	BlueTheme = {
+		TextColor = Color3.fromRGB(235, 235, 235),
+		WindowColor = Color3.fromRGB(29, 40, 53),
+		TabColor = Color3.fromRGB(41, 57, 75),
+		ElementColor = Color3.fromRGB(46, 73, 102),
+		SecondaryElementColor = Color3.fromRGB(103, 160, 236)
+	},
+	GreenTheme = {
+		TextColor = Color3.fromRGB(235, 235, 235),
+		WindowColor = Color3.fromRGB(27, 49, 40),
+		TabColor = Color3.fromRGB(40, 71, 56),
+		ElementColor = Color3.fromRGB(55, 100, 70),
+		SecondaryElementColor = Color3.fromRGB(106, 236, 177)
+	},
+	RedTheme = {
+		TextColor = Color3.fromRGB(235, 235, 235),
+		WindowColor = Color3.fromRGB(25, 0, 0),
+		TabColor = Color3.fromRGB(71, 30, 30),
+		ElementColor = Color3.fromRGB(121, 0, 0),
+		SecondaryElementColor = Color3.fromRGB(236, 40, 40)
 	}
 }
 
 local tostr = tostring
 local MainOriginalSize = UDim2.new(0, 486, 0, 300)
+local shadowTransparency = 1
+
+function Vernesity:AddTheme(ThemeName, THEME)
+	if THEME.TextColor and THEME.WindowColor and THEME.TabColor and THEME.ElementColor and THEME.SecondaryElementColor then
+		Vernesity.Themes[ThemeName] = THEME
+	end
+end
 
 function Tween(instance, speed, style, direction, props)
 	game:GetService('TweenService'):Create(instance, TweenInfo.new(speed, style, direction), props):Play()
@@ -26,7 +64,7 @@ end
 
 function checkDevice()
 	if game:GetService('UserInputService').TouchEnabled and game:GetService('UserInputService').MouseEnabled and game:GetService('UserInputService').KeyboardEnabled then
-		return 'PC with Touch-Enabled Screen'
+		return 'Something'
 	elseif game:GetService('UserInputService').TouchEnabled and not game:GetService('UserInputService').MouseEnabled and not game:GetService('UserInputService').KeyboardEnabled then
 		return 'Mobile'
 	elseif not game:GetService('UserInputService').TouchEnabled and game:GetService('UserInputService').MouseEnabled and game:GetService('UserInputService').KeyboardEnabled then
@@ -130,8 +168,9 @@ function Vernesity:MakeDraggable(obj, Dragger, smoothness)
 	end)
 end
 
-function Vernesity:Window(title1, title2, Theme)
-	local theme = Theme or Themes.DarkTheme
+function Vernesity:Window(title1, title2, Theme, DragNumber)
+	DragNumber = DragNumber or 0
+	local theme = Theme or Vernesity.Themes.DarkTheme
 	local selectedTab = nil
 	local allTabs = {}
 	local Windows = {}
@@ -139,8 +178,8 @@ function Vernesity:Window(title1, title2, Theme)
 	local function SetTheme(newtheme)
 		local ThemeTable = nil
 		if type(newtheme) == 'string' then
-			if Themes[newtheme] then
-				ThemeTable = Themes[newtheme]
+			if Vernesity.Themes[newtheme] then
+				ThemeTable = Vernesity.Themes[newtheme]
 			end
 		elseif type(newtheme) == 'table' then
 			if newtheme.TextColor and newtheme.TabColor and newtheme.WindowColor and newtheme.ElementColor and newtheme.SecondaryElementColor then
@@ -149,7 +188,7 @@ function Vernesity:Window(title1, title2, Theme)
 		end
 		if ThemeTable == nil then
 			warn('Invalid theme, automatically changed the theme to DarkTheme.')
-			ThemeTable = Themes.DarkTheme
+			ThemeTable = Vernesity.Themes.DarkTheme
 		end
 		return ThemeTable
 	end
@@ -215,6 +254,7 @@ function Vernesity:Window(title1, title2, Theme)
 	DropShadow.ZIndex = 0
 	DropShadow.Size = UDim2.new(0, 512, 0, 325)
 	DropShadow.BackgroundTransparency = 1
+	DropShadow.ImageTransparency = shadowTransparency
 	DropShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	DropShadow.ImageColor3 = theme.SecondaryElementColor
 	DropShadow.Image = 'http://www.roblox.com/asset/?id=11505440242'
@@ -259,7 +299,7 @@ function Vernesity:Window(title1, title2, Theme)
 	UICorner.Parent = LeftSide
 	local Title = Instance.new('TextLabel')
 	Title.Name = 'Title'
-	Title.Size = UDim2.new(0, 150, 0, 35)
+	Title.Size = UDim2.new(0, 150, 0, 36)
 	Title.BackgroundTransparency = 1
 	Title.Position = UDim2.new(0, 13, 0, 0)
 	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -319,7 +359,7 @@ function Vernesity:Window(title1, title2, Theme)
 	local Topbar = Instance.new('Frame')
 	Topbar.Name = 'Topbar'
 	Topbar.AnchorPoint = Vector2.new(0.96, 0)
-	Topbar.Size = setElementSizeX(UDim2.new(0, 328, 0, 35))
+	Topbar.Size = setElementSizeX(UDim2.new(0, 328, 0, 36))
 	Topbar.BackgroundTransparency = 1
 	Topbar.Position = UDim2.new(0.96, 0, 0, 0)
 	Topbar.BorderSizePixel = 0
@@ -418,19 +458,19 @@ function Vernesity:Window(title1, title2, Theme)
 	local Value1 = Instance.new('StringValue')
 	Value1.Value = 'X'
 	Value1.Parent = Dragger
-	local Resize = Instance.new('ImageButton')
-	Resize.Name = 'Resize'
-	Resize.Selectable = true
-	Resize.AnchorPoint = Vector2.new(1, 1)
-	Resize.Size = UDim2.new(0, 25, 0, 25)
-	Resize.BackgroundTransparency = 1
-	Resize.Position = UDim2.new(1, 0, 1, 0)
-	Resize.Active = true
-	Resize.BackgroundColor3 = theme.SecondaryElementColor
-	Resize.ImageTransparency = 1
-	Resize.ImageColor3 = theme.SecondaryElementColor
-	Resize.Image = 'http://www.roblox.com/asset/?id=11457659804'
-	Resize.Parent = Main
+	local ResizeButton = Instance.new('ImageButton')
+	ResizeButton.Name = 'ResizeButton'
+	ResizeButton.Selectable = true
+	ResizeButton.AnchorPoint = Vector2.new(1, 1)
+	ResizeButton.Size = UDim2.new(0, 25, 0, 25)
+	ResizeButton.BackgroundTransparency = 1
+	ResizeButton.Position = UDim2.new(1, 0, 1, 0)
+	ResizeButton.Active = true
+	ResizeButton.BackgroundColor3 = theme.SecondaryElementColor
+	ResizeButton.ImageTransparency = 1
+	ResizeButton.ImageColor3 = theme.SecondaryElementColor
+	ResizeButton.Image = 'http://www.roblox.com/asset/?id=11457659804'
+	ResizeButton.Parent = Main
 	local Value3 = Instance.new('StringValue')
 	Value3.Value = 'XY'
 	Value3.Parent = DropShadow
@@ -469,7 +509,7 @@ function Vernesity:Window(title1, title2, Theme)
 	DropShadow.Size = setElementSizeXY(UDim2.new(0, 512, 0, 325))
 	UI.Size = setElementSizeXY(UDim2.new(0, 512, 0, 325))
 	WindowTemplate.Parent = UIParent
-	Vernesity:MakeDraggable(UI, Dragger, 0.15)
+	Vernesity:MakeDraggable(UI, Dragger, DragNumber)
 	function Windows:ChangeTheme(newtheme)
 		newtheme = SetTheme(newtheme)
 		theme = newtheme
@@ -497,8 +537,8 @@ function Vernesity:Window(title1, title2, Theme)
 			end)
 		end
 
-		if WindowTemplate:FindFirstChild("UI") then
-			local ui = WindowTemplate:FindFirstChild("UI")
+		if WindowTemplate:FindFirstChild('UI') then
+			local ui = WindowTemplate:FindFirstChild('UI')
 			ui.BackgroundColor3 = theme.WindowColor
 			ui:FindFirstChild('DropShadow').ImageColor3 = theme.SecondaryElementColor
 			ui:FindFirstChild('DropShadow'):FindFirstChild('Main').BackgroundColor3 = theme.WindowColor
@@ -519,7 +559,7 @@ function Vernesity:Window(title1, title2, Theme)
 						end
 					end
 					if v.ClassName == 'ImageLabel' or v.ClassName == 'ImageButton' then
-						if v.Name == 'CoolValue' or v.Name == 'RGB' or v.Name == 'DropShadow' then
+						if v.Name == 'CoolValue' or v.Name == 'RGB' or v.Name == 'DropShadow' or v.Name == 'ResizeButton' then
 						else
 							v.ImageColor3 = theme.TextColor
 						end
@@ -724,16 +764,22 @@ function Vernesity:Window(title1, title2, Theme)
 				pmain = Main.Size
 				pdropshadow = DropShadow.Size
 			end
+			Tween(DropShadow, g - 0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
+				ImageTransparency = 1
+			})
 			Tween(UI, g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
-				Size = UDim2.new(0, UI.Size.X.Offset, 0, 45)
+				Size = UDim2.new(0, UI.Size.X.Offset, 0, 61)
 			})
 			Tween(Main, g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
 				Size = UDim2.new(0, Main.Size.X.Offset, 0, 35)
 			})
 			Tween(DropShadow, g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
-				Size = UDim2.new(0, DropShadow.Size.X.Offset, 0, 45)
+				Size = UDim2.new(0, DropShadow.Size.X.Offset, 0, 61)
 			})
 		else
+			Tween(DropShadow, g + 0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
+				ImageTransparency = shadowTransparency
+			})
 			Tween(UI, g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
 				Size = pui
 			})
@@ -763,7 +809,7 @@ function Vernesity:Window(title1, title2, Theme)
 
 	local Mouse = game.Players.LocalPlayer:GetMouse()
 	local Frame = Main
-	local Btn = Frame.Resize
+	local Btn = Frame:FindFirstChild('ResizeButton')
 	local Offset = nil
 	local MinimumX, MinimumY = 300, 200
 	local MaxX, MaxY = 1000, 600
@@ -816,6 +862,7 @@ function Vernesity:Window(title1, title2, Theme)
 	end)
 
 	function Windows:SetShadowTransparency(number)
+		shadowTransparency = number
 		DropShadow.ImageTransparency = number
 	end
 
@@ -2968,7 +3015,6 @@ function Vernesity:Window(title1, title2, Theme)
 				local FUNC = func
 				local switch = {}
 				table.insert(switch, name)
-				local toggled = Toggled
 				local SwitchTemplate = Instance.new('Frame')
 				addTypeValue(SwitchTemplate, 'Switch')
 				SwitchTemplate.Name = tostr(name)
@@ -2993,20 +3039,36 @@ function Vernesity:Window(title1, title2, Theme)
 				ViewInfo.Image = 'rbxassetid://3926305904'
 				ViewInfo.ImageColor3 = theme.TextColor
 				ViewInfo.Parent = SwitchTemplate
-				local Button = Instance.new('TextButton')
-				Button.Name = 'Button'
-				Button.Size = setElementSizeX(UDim2.new(0, 328, 0, 40))
-				Button.BackgroundTransparency = 1
-				Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				Button.FontSize = Enum.FontSize.Size14
-				Button.TextSize = 14
-				Button.TextColor3 = Color3.fromRGB(0, 0, 0)
-				Button.Text = ''
-				Button.Font = Enum.Font.SourceSans
-				Button.Parent = SwitchTemplate
-				local Value = Instance.new('StringValue')
-				Value.Value = 'X'
-				Value.Parent = Button
+				local Button1 = Instance.new("TextButton")
+				Button1.Name = "Button1"
+				Button1.AnchorPoint = Vector2.new(1, 0)
+				Button1.Size = setElementSizeX(UDim2.new(0, 38, 0, 40))
+				Button1.BackgroundTransparency = 1
+				Button1.Position = UDim2.new(1, 0, 0, 0)
+				Button1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Button1.FontSize = Enum.FontSize.Size14
+				Button1.TextSize = 14
+				Button1.TextColor3 = Color3.fromRGB(0, 0, 0)
+				Button1.Text = ""
+				Button1.Font = Enum.Font.SourceSans
+				local Value = Instance.new("StringValue")
+				Value.Value = "X"
+				Value.Parent = Button1
+				Button1.Parent = SwitchTemplate
+				local Button2 = Instance.new("TextButton")
+				Button2.Name = "Button2"
+				Button2.Size = UDim2.new(0, 290, 0, 40)
+				Button2.BackgroundTransparency = 1
+				Button2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Button2.FontSize = Enum.FontSize.Size14
+				Button2.TextSize = 14
+				Button2.TextColor3 = Color3.fromRGB(0, 0, 0)
+				Button2.Text = ""
+				Button2.Font = Enum.Font.SourceSans
+				local Value = Instance.new("StringValue")
+				Value.Value = "X"
+				Value.Parent = Button2
+				Button2.Parent = SwitchTemplate
 				local Text = Instance.new('TextLabel')
 				Text.Name = 'Text'
 				Text.AnchorPoint = Vector2.new(0.12, 0.5)
@@ -3049,7 +3111,7 @@ function Vernesity:Window(title1, title2, Theme)
 				Switch.Size = UDim2.new(0, 42, 0, 20)
 				Switch.Position = UDim2.new(0.85, 0, 0, 20)
 				Switch.BorderSizePixel = 0
-				if toggled then
+				if Toggled then
 					Switch.BackgroundColor3 = theme.SecondaryElementColor
 				else
 					Switch.BackgroundColor3 = theme.WindowColor
@@ -3064,7 +3126,7 @@ function Vernesity:Window(title1, title2, Theme)
 				Circle.Size = UDim2.new(0, 16, 0, 16)
 				Circle.BorderSizePixel = 0
 				Circle.BackgroundColor3 = theme.TextColor
-				if toggled then
+				if Toggled then
 					Circle.Position = UDim2.new(0.94, 0, 0.5, 0)
 				else
 					Circle.Position = UDim2.new(0.43, 0, 0.5, 0)
@@ -3076,22 +3138,15 @@ function Vernesity:Window(title1, title2, Theme)
 				Circle.Text = ''
 				Circle.Font = Enum.Font.SourceSans
 				Circle.Parent = Switch
-				local SwitchBtn = Instance.new('TextButton')
-				SwitchBtn.Name = 'Switch'
-				SwitchBtn.AnchorPoint = Vector2.new(0.5, 0.5)
-				SwitchBtn.Size = UDim2.new(0, 42, 0, 20)
-				SwitchBtn.Position = UDim2.new(0.5, 0, 0.5, 0)
-				SwitchBtn.BorderSizePixel = 0
-				SwitchBtn.BackgroundTransparency = 1
-				SwitchBtn.AutoButtonColor = false
-				SwitchBtn.Text = ''
-				SwitchBtn.Parent = Switch
 				local UICorner2 = Instance.new('UICorner')
 				UICorner2.CornerRadius = UDim.new(0, 10)
 				UICorner2.Parent = Circle
 				local Value3 = Instance.new('StringValue')
 				Value3.Value = 'X'
 				Value3.Parent = SwitchTemplate
+				local BoolValue = Instance.new('BoolValue')
+				BoolValue.Value = Toggled
+				BoolValue.Parent = SwitchTemplate
 				SwitchTemplate.Parent = SectionTemplate
 				local f, idk = false, 0.45
 				local style, dir = Enum.EasingStyle.Quad, Enum.EasingDirection.InOut
@@ -3127,9 +3182,10 @@ function Vernesity:Window(title1, title2, Theme)
 						})
 					end
 				end
-				Button.MouseButton1Click:Connect(a)
-				SwitchBtn.MouseButton1Click:Connect(function()
+				Button1.MouseButton1Click:Connect(a)
+				Button2.MouseButton1Click:Connect(function()
 					Toggled = not Toggled
+					BoolValue.Value = Toggled
 					FUNC(Toggled)
 					if Toggled then
 						Tween(Circle, 0.75, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut, {
@@ -3154,6 +3210,7 @@ function Vernesity:Window(title1, title2, Theme)
 					Info.Text = tostr(newInfo)
 					Text.Text = tostr(newName)
 					Toggled = newToggled
+					BoolValue.Value = Toggled
 					name = newName
 					if Toggled then
 						Tween(Circle, 0.75, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut, {
@@ -3265,7 +3322,7 @@ function Vernesity:Window(title1, title2, Theme)
 					UIStroke.Parent = MobileKeybind
 					keybindinput = MobileKeybind
 				end
-				if device == 'PC' or device == 'Unknown' or device == 'PC with Touch-Enabled Screen' then
+				if device == 'PC' or device == 'Unknown' or device == 'Something' then
 					local Keybind = Instance.new('TextButton')
 					Keybind.Name = 'Keybind'
 					Keybind.AnchorPoint = Vector2.new(0.85, 0.5)
@@ -3350,7 +3407,7 @@ function Vernesity:Window(title1, title2, Theme)
 				local currentKey = defaultkey
 				local mobile_key = nil
 				local choosing = false
-				if device == 'PC' or device == 'Unknown' or device == 'PC with Touch-Enabled Screen' then
+				if device == 'PC' or device == 'Unknown' or device == 'Something' then
 					keybindinput.MouseButton1Click:Connect(function()
 						choosing = true
 						Tween(keybindinput:FindFirstChild('UIStroke'), 0.35, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
@@ -3532,7 +3589,7 @@ function Vernesity:Window(title1, title2, Theme)
 				return keybind
 			end
 
-			function Section:Dropdown(name, list, func)
+			function Section:Dropdown(name, list, default, func)
 				local dropdown = {}
 				table.insert(dropdown, name)
 				local FUNC = func
@@ -3617,7 +3674,7 @@ function Vernesity:Window(title1, title2, Theme)
 				local UIStroke = Instance.new('UIStroke')
 				UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 				UIStroke.Transparency = 1
-				UIStroke.Color = Color3.fromRGB(1, 145, 255)
+				UIStroke.Color = theme.SecondaryElementColor
 				UIStroke.Parent = SearchBox
 				local Text = Instance.new('TextLabel')
 				Text.Name = 'Text'
@@ -3631,7 +3688,7 @@ function Vernesity:Window(title1, title2, Theme)
 				Text.TextTransparency = 0.1
 				Text.TextSize = 14
 				Text.TextColor3 = theme.TextColor
-				Text.Text = tostr(name)
+				Text.Text = tostr(name)..': '..default
 				Text.Font = Enum.Font.GothamMedium
 				Text.TextXAlignment = Enum.TextXAlignment.Left
 				Text.Parent = Buttons
@@ -3707,15 +3764,15 @@ function Vernesity:Window(title1, title2, Theme)
 					end
 				end)
 				local function createDropdownButton(Name)
-					local Drop_Button = Instance.new("Frame")
+					local Drop_Button = Instance.new('Frame')
 					Drop_Button.Name = tostr(Name)
 					Drop_Button.Size = setElementSizeX(UDim2.new(0, 316, 0, 25))
 					Drop_Button.BackgroundTransparency = 1
 					Drop_Button.Position = UDim2.new(0.035, 0, 0, 0)
 					Drop_Button.BorderSizePixel = 0
 					Drop_Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-					local Text2 = Instance.new("TextLabel")
-					Text2.Name = "Text"
+					local Text2 = Instance.new('TextLabel')
+					Text2.Name = 'Text2'
 					Text2.AnchorPoint = Vector2.new(0.5, 0.5)
 					Text2.Size = setElementSizeX(UDim2.new(0, 281, 0, 20))
 					Text2.BackgroundTransparency = 1
@@ -3729,8 +3786,8 @@ function Vernesity:Window(title1, title2, Theme)
 					Text2.Font = Enum.Font.Gotham
 					Text2.TextXAlignment = Enum.TextXAlignment.Left
 					Text2.Parent = Drop_Button
-					local Button = Instance.new("TextButton")
-					Button.Name = "Button"
+					local Button = Instance.new('TextButton')
+					Button.Name = 'Button'
 					Button.Selectable = false
 					Button.AnchorPoint = Vector2.new(0.5, 0.5)
 					Button.Size = setElementSizeX(UDim2.new(0, 327, 0, 20))
@@ -3742,18 +3799,18 @@ function Vernesity:Window(title1, title2, Theme)
 					Button.TextTransparency = 1
 					Button.TextSize = 14
 					Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-					Button.Text = ""
+					Button.Text = ''
 					Button.Font = Enum.Font.Gotham
 					Button.TextXAlignment = Enum.TextXAlignment.Left
 					Button.Parent = Drop_Button
-					local Value = Instance.new("StringValue")
-					Value.Value = "X"
+					local Value = Instance.new('StringValue')
+					Value.Value = 'X'
 					Value.Parent = Button
-					local Value1 = Instance.new("StringValue")
-					Value1.Value = "X"
+					local Value1 = Instance.new('StringValue')
+					Value1.Value = 'X'
 					Value1.Parent = Drop_Button
-					local Value2 = Instance.new("StringValue")
-					Value2.Value = "X"
+					local Value2 = Instance.new('StringValue')
+					Value2.Value = 'X'
 					Value2.Parent = Text
 					Drop_Button.Parent = Objects
 					Drop_Button.MouseEnter:Connect(function()
@@ -3767,6 +3824,7 @@ function Vernesity:Window(title1, title2, Theme)
 						})
 					end)
 					Button.MouseButton1Click:Connect(function()
+						Text.Text = tostr(name)..': '..Text2.Text
 						opened = false
 						FUNC(Text2.Text)
 						Tween(Text, idk, style, dir, {
@@ -3797,10 +3855,10 @@ function Vernesity:Window(title1, title2, Theme)
 						Transparency = 0
 					})
 				end)
-				SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
+				SearchBox:GetPropertyChangedSignal('Text'):Connect(function()
 					for i, v in pairs(Objects:GetChildren()) do
-						if v.ClassName == "Frame" then
-							local txt = v:FindFirstChild("Text").Text
+						if v.ClassName == 'Frame' then
+							local txt = v:FindFirstChild('Text').Text
 							if string.find(txt:lower(), SearchBox.Text:lower()) then
 								v.Visible = true
 							else
@@ -3809,12 +3867,14 @@ function Vernesity:Window(title1, title2, Theme)
 						end
 					end
 				end)
-				function dropdown:Edit(newName, newList, newFunc)
+				function dropdown:Edit(newName, newList, newDefault, newFunc)
 					name = newName
 					list = newList
+					default = newDefault
+					Text.Text = tostr(name)..': '..default
 					FUNC, func = newFunc, newFunc
 					for i, v in pairs(Objects:GetChildren()) do
-						if v.ClassName == "Frame" then
+						if v.ClassName == 'Frame' then
 							v:Destroy()
 						end
 					end
@@ -3849,15 +3909,88 @@ function Vernesity:Window(title1, title2, Theme)
 					list = nil
 					FUNC, func = function()end, function()end
 					for i, v in pairs(Objects:GetChildren()) do
-						if v.ClassName == "Frame" then
+						if v.ClassName == 'Frame' then
 							v:Destroy()
 						end
 					end
 					DropdownTemplate:Destroy()
 					amountOfButtons = 0
 				end
+				function dropdown:Button(btnName)
+					local dropdownButton = {}
+					table.insert(dropdownButton, btnName)
+					createDropdownButton(btnName)
+					amountOfButtons = amountOfButtons + 1
+					if opened then
+						changeSize()
+					else
+						if amountOfButtons > 3 then
+							size = 80
+							local canvas = Objects.CanvasSize
+							Objects.CanvasSize = UDim2.new(canvas.X.Scale, canvas.X.Offset, canvas.Y.Scale, 105 + (amountOfButtons - 4) * 25)
+						end
+						if amountOfButtons == 3 then
+							size = 80
+						end
+						if amountOfButtons == 2 then
+							size = 55
+						end
+						if amountOfButtons == 1 then
+							size = 30
+						end
+						if amountOfButtons == 0 then
+							size = 0
+						end
+					end
+					function dropdownButton:Edit(newname)
+						Objects:FindFirstChild(btnName):FindFirstChild('Text2').Text = newname
+						Objects:FindFirstChild(btnName).Name = newname
+						btnName = newname
+					end
+					function dropdownButton:Remove()
+						Objects:FindFirstChild(btnName):Destroy()
+						amountOfButtons = amountOfButtons - 1
+						if opened then
+							changeSize()
+						else
+							if amountOfButtons > 3 then
+								size = 80
+								local canvas = Objects.CanvasSize
+								Objects.CanvasSize = UDim2.new(canvas.X.Scale, canvas.X.Offset, canvas.Y.Scale, 105 + (amountOfButtons - 4) * 25)
+							end
+							if amountOfButtons == 3 then
+								size = 80
+							end
+							if amountOfButtons == 2 then
+								size = 55
+							end
+							if amountOfButtons == 1 then
+								size = 30
+							end
+							if amountOfButtons == 0 then
+								size = 0
+							end
+						end
+					end
+					return dropdownButton
+				end
 				return dropdown
-			end		
+			end
+			function Section:PlayerList(name, func)
+				local plrtable = {}
+				for i, v in pairs(game.Players:GetPlayers()) do
+					table.insert(plrtable, v.Name)
+				end
+				local playerList = Section:Dropdown(name, plrtable, plrtable[1], func)
+				game.Players.PlayerAdded:Connect(function(player)
+					table.insert(plrtable, player.Name)
+					playerList:Edit(name, plrtable, plrtable[1], func)
+				end)
+				game.Players.PlayerRemoving:Connect(function(player)
+					table.remove(plrtable, table.find(plrtable, player.Name))
+					playerList:Edit(name, plrtable, plrtable[1], func)
+				end)
+			end
 			return Section
 		end
 		return Tab
