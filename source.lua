@@ -2421,9 +2421,10 @@ function Vernesity:Window(title1, title2, Theme)
 				bar.Size = UDim2.new((defaultvalue - minval) / (maxval - minval), 0, 1, 0)
 				Slider.MouseButton1Down:Connect(function()
 					held = true
-					Tween(bar, 0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
+					Tween(bar, 0.05, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
 						Size = UDim2.new(math.clamp((mouse.X - Slider.AbsolutePosition.X)/Slider.AbsoluteSize.X,0,1),0,1,0)
 					})
+					task.wait(0.05)
 					percentage = math.floor(((bar.Size.X.Scale * maxval) / maxval) * (maxval - minval) + minval)
 					textbox.Text = percentage
 				end)
@@ -2434,9 +2435,10 @@ function Vernesity:Window(title1, title2, Theme)
 				end)
 				mouse.Move:Connect(function()
 					if held then
-						Tween(bar, 0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
+						Tween(bar, 0.05, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
 							Size = UDim2.new(math.clamp((mouse.X - Slider.AbsolutePosition.X)/Slider.AbsoluteSize.X,0,1),0,1,0)
 						})
+						task.wait(0.05)
 						percentage = math.floor(((bar.Size.X.Scale * maxval) / maxval) * (maxval - minval) + minval)
 						textbox.Text = percentage
 					end
@@ -2444,7 +2446,7 @@ function Vernesity:Window(title1, title2, Theme)
 				textbox.FocusLost:Connect(function()
 					if typeof(tonumber(textbox.Text)) == 'number' then
 						percentage = tonumber(textbox.Text)
-						Tween(bar, 0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
+						Tween(bar, 0.05, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
 							Size = UDim2.new((textbox.Text - minval) / (maxval - minval), 0, 1, 0)
 						})
 					else
