@@ -1656,7 +1656,7 @@ function Vernesity:Window(title1, title2, Theme)
 			local Value = Instance.new('StringValue')
 			Value.Value = 'X'
 			Value.Parent = SectionTemplate
-			SectionTemplate.Parent = Tabs[selectedTab]:FindFirstChild('Elements')
+			SectionTemplate.Parent = TabTemplate:FindFirstChild('Elements')
 			UIListLayout:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
 				local c = UIListLayout
 				SectionTemplate.Size = UDim2.new(0, c.AbsoluteContentSize.X, 0, c.AbsoluteContentSize.Y)
