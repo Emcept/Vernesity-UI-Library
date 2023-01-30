@@ -83,3 +83,10 @@ local Slider = Section:Slider(<Slider Name>, <Slider Description>, <Minimum Valu
 ```
 local ColorPicker = Section:ColorPicker(<ColorPicker Name>, <ColorPicker Description>, <Default Color>, <Function>)
 ```
+<br />
+
+## Creating Keybinds
+```
+local Keybind = Section:Keybind(<Keybind Name>, <Keybind Description>, <Default Keybind>, <Function>)
+```
+<br />
