@@ -54,3 +54,32 @@ local Label = Section:Label(<Label Name>)
 local TextBox = Section:TextBox(<TextBox Name>, <TextBox Description>, <Default Text>, <Function>)
 ```
 <br />
+
+## Creating Dropdowns
+```
+local Dropdown = Section:Dropdown(<Dropdown Name>, <Dropdown List>, <Default Option>, <Function>)
+```
+<br />
+
+## Creating Switches
+```
+local Switch = Section:Switch(<Switch Name>, <Switch Description>, <Enabled (true/false)>, <Function>)
+```
+<br />
+
+## Creating Toggles
+```
+local Toggle = Section:Toggle(<Toggle Name>, <Toggle Description>, <Enabled (true/false)>, <Function>)
+```
+<br />
+
+## Creating Sliders
+```
+local Slider = Section:Slider(<Slider Name>, <Slider Description>, <Minimum Value>, <Maximum Value>, <Default Value>, <Function>)
+```
+<br />
+
+## Creating ColorPickers
+```
+local ColorPicker = Section:ColorPicker(<ColorPicker Name>, <ColorPicker Description>, <Default Color>, <Function>)
+```
