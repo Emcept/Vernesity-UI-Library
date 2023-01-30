@@ -169,7 +169,7 @@ function Vernesity:MakeDraggable(obj, Dragger, smoothness)
 end
 
 function Vernesity:Window(title1, title2, Theme)
-	DragNumber = DragNumber or 0
+	local DragNumber = 0
 	local theme = Theme or Vernesity.Themes.DarkTheme
 	local selectedTab = nil
 	local allTabs = {}
@@ -647,8 +647,12 @@ function Vernesity:Window(title1, title2, Theme)
 							for i, v in pairs(obj:GetChildren()) do
 								task.spawn(function()
 									if v.ClassName == 'Frame' and v.Name == 'Switch' then
-										v.BackgroundColor3 = theme.WindowColor
 										v:FindFirstChild('Circle').BackgroundColor3 = theme.TextColor
+										if obj:FindFirstChild("Toggled").Value then
+											v.BackgroundColor3 = theme.SecondaryElementColor
+										else
+											v.BackgroundColor3 = theme.WindowColor
+										end
 									end
 								end)
 							end
