@@ -110,6 +110,8 @@ local Window = Library:Window("Vernesity", "Game Name", {
 })
 ```
 #### or
+<br />
+
 ```
 Library:AddTheme("AwfulTheme", {
 	TextColor = Color3.fromRGB(235, 235, 235),
