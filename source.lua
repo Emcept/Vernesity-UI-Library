@@ -3151,6 +3151,7 @@ function Vernesity:Window(title1, title2, Theme)
 				Value3.Parent = SwitchTemplate
 				local BoolValue = Instance.new('BoolValue')
 				BoolValue.Value = Toggled
+				BoolValue.Name = 'Toggled'
 				BoolValue.Parent = SwitchTemplate
 				SwitchTemplate.Parent = SectionTemplate
 				local f, idk = false, 0.45
