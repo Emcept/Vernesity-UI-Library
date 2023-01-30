@@ -23,11 +23,13 @@ local Window = Library:Window(<Title>, <Game Name>, <Theme (optional)>)
 > GreenTheme  
 
 <br />
+
 ## Creating Tabs
 ```
 local Tab = Window:Tab(<Tab Name>, <ImageID (optional)>)
 ```
 <br />
+
 ## Creating Sections
 ```
 local Section = Tab:Section(<Section Name>)
