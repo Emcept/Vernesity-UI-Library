@@ -6,12 +6,12 @@
 ```
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Emcept/Vernesity-UI-Library/main/source.lua"))()
 ```
-<br /><br />
+<br />
 ## Creating a Window
 ```
 local Window = Library:Window(<Title>, <Game Name>, <Theme (optional)>)
 ```
-<br /><br />
+<br />
 
 ### Themes:
 > DarkTheme  
@@ -21,12 +21,12 @@ local Window = Library:Window(<Title>, <Game Name>, <Theme (optional)>)
 > RedTheme  
 > GreenTheme  
 
-<br /><br />
+<br />
 ## Creating Tabs
 ```
 local Tab = Window:Tab(<Tab Name>, <ImageID (optional)>)
 ```
-<br /><br />
+<br />
 ## Creating Sections
 ```
 local Section = Tab:Section(<Section Name>)
