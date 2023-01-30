@@ -168,7 +168,7 @@ function Vernesity:MakeDraggable(obj, Dragger, smoothness)
 	end)
 end
 
-function Vernesity:Window(title1, title2, Theme, DragNumber)
+function Vernesity:Window(title1, title2, Theme)
 	DragNumber = DragNumber or 0
 	local theme = Theme or Vernesity.Themes.DarkTheme
 	local selectedTab = nil
