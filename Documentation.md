@@ -91,6 +91,36 @@ local Keybind = Section:Keybind(<Keybind Name>, <Keybind Description>, <Default 
 ```
 <br /><br /><br />
 
+
+## Other Functions
+### Getting the current Window's theme
+```
+local theme = Window:GetTheme()
+```
+
+### Adding themes
+#### There are 2 ways to add themes:
+```
+local Window = Library:Window("Vernesity", "Game Name", {
+	TextColor = Color3.fromRGB(235, 235, 235),
+	WindowColor = Color3.fromRGB(49, 49, 27),
+	TabColor = Color3.fromRGB(71, 71, 40),
+	ElementColor = Color3.fromRGB(100, 100, 54),
+	SecondaryElementColor = Color3.fromRGB(236, 236, 104)
+})
+```
+#### or
+```
+Vernesity:AddTheme("AwfulTheme", {
+	TextColor = Color3.fromRGB(235, 235, 235),
+	WindowColor = Color3.fromRGB(49, 49, 27),
+	TabColor = Color3.fromRGB(71, 71, 40),
+	ElementColor = Color3.fromRGB(100, 100, 54),
+	SecondaryElementColor = Color3.fromRGB(236, 236, 104)
+})
+local Window = Library:Window("Vernesity", "Game Name", "AwfulTheme")
+```
+
 ## Editing UI Elements:
 ```
 <Element>:Edit(<New Arguments>)
