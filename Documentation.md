@@ -89,4 +89,13 @@ local ColorPicker = Section:ColorPicker(<ColorPicker Name>, <ColorPicker Descrip
 ```
 local Keybind = Section:Keybind(<Keybind Name>, <Keybind Description>, <Default Keybind>, <Function>)
 ```
-<br />
+<br /><br /><br />
+
+## Editing UI Elements:
+```
+<Element>:Edit(<New Arguments>)
+```
+Example:
+```
+local Window = Library:Window("Vernesity", "Game Name", "DarkTheme")
+Window:Edit("New Title", "New Game Name", "PurpleTheme")
