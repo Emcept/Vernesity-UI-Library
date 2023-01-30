@@ -99,3 +99,15 @@ local Keybind = Section:Keybind(<Keybind Name>, <Keybind Description>, <Default 
 ```
 local Window = Library:Window("Vernesity", "Game Name", "DarkTheme")
 Window:Edit("New Title", "New Game Name", "PurpleTheme")
+```
+<br /><br />
+
+## Removing UI Elements:
+```
+<Element>:Remove()
+```
+### Example:
+```
+local Window = Library:Window("Vernesity", "Game Name", "DarkTheme")
+Window:Remove()
+```
