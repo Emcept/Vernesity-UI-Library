@@ -226,6 +226,17 @@ end
 ```
 <br />
 
+### Other Useless Functions: :OnClose() and :OnMinimize(<Function>)
+```
+Window:OnClose(function()
+	print('Closed')
+end)
+Window:OnMinimize(function(state)
+	print('Minimized:', state)
+end)
+```
+<br /><br /><br />	
+
 ## EXAMPLE CODE:
 ```
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Emcept/Vernesity-UI-Library/main/source.lua"))()
@@ -282,4 +293,11 @@ for i, v in pairs(theme) do
 		Window:ChangeTheme(theme)
 	end)
 end
+
+Window:OnClose(function()
+	print('Closed')
+end)
+Window:OnMinimize(function(state)
+	print('Minimized:', state)
+end)
 ```
