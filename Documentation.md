@@ -92,6 +92,15 @@ local Interactable = Section:Interactable(<Interactable Name>, <Interactable Des
 ```
 local Dropdown = Section:Dropdown(<Dropdown Name>, <Dropdown List>, <Default Option>, <Function>)
 ```
+### Adding a button inside of a Dropdown
+```
+local DropdownButton = Dropdown:Button(<Button Name>)
+```
+#### Just like any other UI element, you can remove or edit it
+```
+DropdownButton:Edit("Hi")
+DropdownButton:Remove()
+```
 <br />
 
 ## Creating Switches
@@ -201,4 +210,76 @@ Window:Edit("New Title", "New Game Name", "PurpleTheme")
 ```
 local Window = Library:Window("Vernesity", "Game Name", "DarkTheme")
 Window:Remove()
+```
+<br /><br />
+
+### And here's the code which will help you add a fully customizable UI
+```
+local theme = Window:GetTheme()
+for i, v in pairs(theme) do
+	settingsSection:ColorPicker(i, "Changes "..i.."'s theme", v, function(color3)
+		theme = Window:GetTheme()
+		theme[i] = color3
+		Window:ChangeTheme(theme)
+	end)
+end
+```
+<br />
+
+## EXAMPLE CODE:
+```
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Emcept/Vernesity-UI-Library/main/source.lua"))()
+local Window = Library:Window("Vernesity", "Game Name", "DarkTheme")
+local Tab = Window:Tab("Tab 1")
+local SettingsTab = Window:Tab("Settings", 10846926154)
+local Section = Tab:Section("Main")
+local Button = Section:Button("Button", "Desc", function()
+print("Clicked")
+end)
+local Label = Section:Label("Label")
+local TextBox = Section:TextBox("TextBox", "Desc", "Type here...", function(text)
+    print("You typed:", text)
+end)
+local Dropdown = Section:Dropdown("Dropdown", {"Option 1", "Option 2"}, "Select...", function(selectedOption)
+    print(selectedOption)
+end)
+local Switch = Section:Switch("Switch", "Desc", true, function(state)
+    if state then
+        print("On")
+    else
+        print("Off")
+    end
+end)
+local Toggle = Section:Toggle("Toggle", "Desc", true, function(state)
+    if state then
+        print("On")
+    else
+        print("Off")
+    end
+end)
+local Slider = Section:Slider("WalkSpeed", "Desc", 0, 100, 16, function(speed)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed
+end)
+local Keybind = Section:Keybind("Keybind", "Desc", "F", function()
+    print("Pressed the keybind!")
+end)
+
+Window:Notify("Question", "Do you like this UI Library?", {"Yes", "No"}, 5, function(Text)
+if Text == "Yes" then
+    print("Thank you!")
+else
+    print(":(")
+    end
+end)
+
+local settingsSection = SettingsTab:Section("Settings")
+
+local theme = Window:GetTheme()
+for i, v in pairs(theme) do
+	settingsSection:ColorPicker(i, "Changes "..i.."'s theme", v, function(color3)
+		theme = Window:GetTheme()
+		theme[i] = color3
+		Window:ChangeTheme(theme)
+	end)
+end
 ```
