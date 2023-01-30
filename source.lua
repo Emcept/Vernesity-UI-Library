@@ -3864,7 +3864,7 @@ function Vernesity:Window(title1, title2, Theme)
 				SearchBox:GetPropertyChangedSignal('Text'):Connect(function()
 					for i, v in pairs(Objects:GetChildren()) do
 						if v.ClassName == 'Frame' then
-							local txt = v:FindFirstChild('Text').Text
+							local txt = v:FindFirstChild('Text2').Text
 							if string.find(txt:lower(), SearchBox.Text:lower()) then
 								v.Visible = true
 							else
