@@ -55,6 +55,18 @@ local TextBox = Section:TextBox(<TextBox Name>, <TextBox Description>, <Default 
 ```
 <br />
 
+## Creating Paragraphs
+```
+local Paragraph = Section:Paragraph(<Text 1>, <Text 2>)
+```
+<br />
+
+## Creating Interactables
+```
+local Interactable = Section:Interactable(<Interactable Name>, <Interactable Description>, <Button Text>, <Function>)
+```
+<br />
+
 ## Creating Dropdowns
 ```
 local Dropdown = Section:Dropdown(<Dropdown Name>, <Dropdown List>, <Default Option>, <Function>)
