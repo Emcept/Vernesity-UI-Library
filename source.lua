@@ -3044,6 +3044,39 @@ function Vernesity:Window(title1, title2, Theme)
 				ViewInfo.Image = 'rbxassetid://3926305904'
 				ViewInfo.ImageColor3 = theme.TextColor
 				ViewInfo.Parent = SwitchTemplate
+				local Switch = Instance.new('Frame')
+				Switch.Name = 'Switch'
+				Switch.AnchorPoint = Vector2.new(0.85, 0.5)
+				Switch.Size = UDim2.new(0, 42, 0, 20)
+				Switch.Position = UDim2.new(0.85, 0, 0, 20)
+				Switch.BorderSizePixel = 0
+				if Toggled then
+					Switch.BackgroundColor3 = theme.SecondaryElementColor
+				else
+					Switch.BackgroundColor3 = theme.WindowColor
+				end
+				Switch.Parent = SwitchTemplate
+				local UICorner1 = Instance.new('UICorner')
+				UICorner1.CornerRadius = UDim.new(0, 10)
+				UICorner1.Parent = Switch
+				local Circle = Instance.new('TextButton')
+				Circle.Name = 'Circle'
+				Circle.AnchorPoint = Vector2.new(1, 0.5)
+				Circle.Size = UDim2.new(0, 16, 0, 16)
+				Circle.BorderSizePixel = 0
+				Circle.BackgroundColor3 = theme.TextColor
+				if Toggled then
+					Circle.Position = UDim2.new(0.94, 0, 0.5, 0)
+				else
+					Circle.Position = UDim2.new(0.43, 0, 0.5, 0)
+				end
+				Circle.AutoButtonColor = false
+				Circle.FontSize = Enum.FontSize.Size14
+				Circle.TextSize = 14
+				Circle.TextColor3 = Color3.fromRGB(0, 0, 0)
+				Circle.Text = ''
+				Circle.Font = Enum.Font.SourceSans
+				Circle.Parent = Switch
 				local Button1 = Instance.new("TextButton")
 				Button1.Name = "Button1"
 				Button1.AnchorPoint = Vector2.new(1, 0)
@@ -3110,39 +3143,6 @@ function Vernesity:Window(title1, title2, Theme)
 				local Value2 = Instance.new('StringValue')
 				Value2.Value = 'X'
 				Value2.Parent = Info
-				local Switch = Instance.new('Frame')
-				Switch.Name = 'Switch'
-				Switch.AnchorPoint = Vector2.new(0.85, 0.5)
-				Switch.Size = UDim2.new(0, 42, 0, 20)
-				Switch.Position = UDim2.new(0.85, 0, 0, 20)
-				Switch.BorderSizePixel = 0
-				if Toggled then
-					Switch.BackgroundColor3 = theme.SecondaryElementColor
-				else
-					Switch.BackgroundColor3 = theme.WindowColor
-				end
-				Switch.Parent = SwitchTemplate
-				local UICorner1 = Instance.new('UICorner')
-				UICorner1.CornerRadius = UDim.new(0, 10)
-				UICorner1.Parent = Switch
-				local Circle = Instance.new('TextButton')
-				Circle.Name = 'Circle'
-				Circle.AnchorPoint = Vector2.new(1, 0.5)
-				Circle.Size = UDim2.new(0, 16, 0, 16)
-				Circle.BorderSizePixel = 0
-				Circle.BackgroundColor3 = theme.TextColor
-				if Toggled then
-					Circle.Position = UDim2.new(0.94, 0, 0.5, 0)
-				else
-					Circle.Position = UDim2.new(0.43, 0, 0.5, 0)
-				end
-				Circle.AutoButtonColor = false
-				Circle.FontSize = Enum.FontSize.Size14
-				Circle.TextSize = 14
-				Circle.TextColor3 = Color3.fromRGB(0, 0, 0)
-				Circle.Text = ''
-				Circle.Font = Enum.Font.SourceSans
-				Circle.Parent = Switch
 				local UICorner2 = Instance.new('UICorner')
 				UICorner2.CornerRadius = UDim.new(0, 10)
 				UICorner2.Parent = Circle
