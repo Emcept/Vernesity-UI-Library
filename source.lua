@@ -175,6 +175,13 @@ function Vernesity:Window(title1, title2, Theme)
 	local allTabs = {}
 	local Windows = {}
 	table.insert(Windows, title1)
+	local onclose, onminimize = function() end, function() end
+	function Windows:OnClose(func)
+		onclose = func
+	end
+	function Windows:OnMinimize(func)
+		onminimize = func
+	end
 	local function SetTheme(newtheme)
 		local ThemeTable = nil
 		if type(newtheme) == 'string' then
@@ -762,6 +769,7 @@ function Vernesity:Window(title1, title2, Theme)
 	local g = 0.75
 	d_Minimize.MouseButton1Click:Connect(function()
 		minimized = not minimized
+		onminimize(minimized)
 		if minimized then
 			if pui == nil and pmain == nil and pdropshadow == nil then
 				pui = UI.Size
@@ -798,6 +806,7 @@ function Vernesity:Window(title1, title2, Theme)
 
 	local j = 0.5
 	e_Close.MouseButton1Click:Connect(function()
+		onclose()
 		Tween(UI, j, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
 			Size = UDim2.new(0, 0, 0, 0)
 		})
