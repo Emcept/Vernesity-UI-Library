@@ -300,4 +300,8 @@ end)
 Window:OnMinimize(function(state)
 	print('Minimized:', state)
 end)
+	
+local PlayerList = Section:PlayerList("Choose a player", function(plr)
+	print(plr)
+end)
 ```
