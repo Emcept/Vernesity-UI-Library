@@ -3994,19 +3994,36 @@ function Vernesity:Window(title1, title2, Theme)
 				return dropdown
 			end
 			function Section:PlayerList(name, func)
+				local playerlist = {}
+				table.insert(playerlist, name)
+				local run = true
 				local plrtable = {}
 				for i, v in pairs(game.Players:GetPlayers()) do
 					table.insert(plrtable, v.Name)
 				end
 				local playerList = Section:Dropdown(name, plrtable, plrtable[1], func)
 				game.Players.PlayerAdded:Connect(function(player)
-					table.insert(plrtable, player.Name)
-					playerList:Edit(name, plrtable, plrtable[1], func)
+					if run then
+						table.insert(plrtable, player.Name)
+						playerList:Edit(name, plrtable, plrtable[1], func)
+					end
 				end)
 				game.Players.PlayerRemoving:Connect(function(player)
-					table.remove(plrtable, table.find(plrtable, player.Name))
-					playerList:Edit(name, plrtable, plrtable[1], func)
+					if run then
+						table.remove(plrtable, table.find(plrtable, player.Name))
+						playerList:Edit(name, plrtable, plrtable[1], func)
+					end
 				end)
+				function playerlist:Edit(newName, newFunc)
+					name = newName
+					func = newFunc
+					playerList:Edit(name, plrtable, plrtable[1], func)
+				end
+				function playerList:Remove()
+					run = false
+					playerList:Remove()
+				end
+				return playerlist
 			end
 			return Section
 		end
