@@ -4019,7 +4019,7 @@ function Vernesity:Window(title1, title2, Theme)
 					func = newFunc
 					playerList:Edit(name, plrtable, plrtable[1], func)
 				end
-				function playerList:Remove()
+				function playerlist:Remove()
 					run = false
 					playerList:Remove()
 				end
