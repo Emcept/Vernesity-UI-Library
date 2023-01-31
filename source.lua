@@ -92,23 +92,18 @@ function getSizeValue(INSTANCE)
 	end
 end
 
-function getType(INSTANCE)
-	local a = nil
-	for _, value in pairs(INSTANCE:GetChildren()) do
-		if value.ClassName == 'RayValue' then
-			a = value
-			return value.Value
-		end
-	end
-	if a == nil then
-		return nil
-	end
-end
-
 local conns = {}
 local module = {}
 local dragging = false
 local UIParent = game.Players.LocalPlayer.PlayerGui
+local idklol = Instance.new('ScreenGui')
+pcall(function()
+	idklol.Parent = game.CoreGui
+end)
+if idklol.Parent == game.CoreGui then
+	UIParent = game.CoreGui
+end
+idklol:Destroy()
 
 function Vernesity:MakeDraggable(obj, Dragger, smoothness)
 	local UIS = game:GetService('UserInputService')
@@ -237,6 +232,7 @@ function Vernesity:Window(title1, title2, Theme)
 	end
 	local WindowTemplate = Instance.new('ScreenGui')
 	WindowTemplate.Name = tostr(title1)
+	WindowTemplate.ResetOnSpawn = false
 	WindowTemplate.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	addTypeValue(WindowTemplate, 'Window')
 	WindowTemplate.DescendantAdded:Connect(function(c)
@@ -3424,6 +3420,34 @@ function Vernesity:Window(title1, title2, Theme)
 				local currentKey = defaultkey
 				local mobile_key = nil
 				local choosing = false
+				local function e()
+					local g = keybindinput
+					local ms = game.Players.LocalPlayer:GetMouse()
+					local Circle = Instance.new('ImageLabel')
+					Circle.Name = 'Circle'
+					Circle.Parent = g
+					Circle.BackgroundColor3 = theme.SecondaryElementColor
+					Circle.ImageColor3 = theme.SecondaryElementColor
+					Circle.BackgroundTransparency = 1
+					Circle.BorderSizePixel = 0
+					Circle.Image = 'http://www.roblox.com/asset/?id=4560909609'
+					Circle.ImageTransparency = .6
+					g.ClipsDescendants = true
+					local len, size = 1, nil
+					local c = Circle
+					c.Position = UDim2.new(-0.5, 0, 0.5, 0)
+					if g.AbsoluteSize.X >= g.AbsoluteSize.Y then
+						size = (g.AbsoluteSize.X * 1.5)
+					else
+						size = (g.AbsoluteSize.Y * 1.5)
+					end
+					Tween(c, len, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
+						ImageTransparency = 1
+					})
+					c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
+					wait(len+0.1)
+					c:Destroy()
+				end
 				if device == 'PC' or device == 'Unknown' or device == 'Something' then
 					keybindinput.MouseButton1Click:Connect(function()
 						choosing = true
@@ -3472,32 +3496,7 @@ function Vernesity:Window(title1, title2, Theme)
 						if not game:GetService('UserInputService'):GetFocusedTextBox() and choosing == false then
 							if input.KeyCode.Name:upper() == currentKey:upper() then
 								FUNC(currentKey)
-								local g = keybindinput
-								local ms = game.Players.LocalPlayer:GetMouse()
-								local Circle = Instance.new('ImageLabel')
-								Circle.Name = 'Circle'
-								Circle.Parent = g
-								Circle.BackgroundColor3 = theme.SecondaryElementColor
-								Circle.ImageColor3 = theme.SecondaryElementColor
-								Circle.BackgroundTransparency = 1
-								Circle.BorderSizePixel = 0
-								Circle.Image = 'http://www.roblox.com/asset/?id=4560909609'
-								Circle.ImageTransparency = .45
-								g.ClipsDescendants = true
-								local len, size = 1, nil
-								local c = Circle
-								c.Position = UDim2.new(-0.5, 0, 0.5, 0)
-								if g.AbsoluteSize.X >= g.AbsoluteSize.Y then
-									size = (g.AbsoluteSize.X * 1.5)
-								else
-									size = (g.AbsoluteSize.Y * 1.5)
-								end
-								Tween(c, len, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
-									ImageTransparency = 1
-								})
-								c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-								wait(len)
-								c:Destroy()
+								e()
 							end
 						end
 					end)
@@ -3566,6 +3565,7 @@ function Vernesity:Window(title1, title2, Theme)
 						mobile_key = MobileKeybindButton
 						Button.MouseButton1Click:Connect(function()
 							FUNC(keybindinput.Text)
+							e()
 						end)
 					end
 					keybindinput.FocusLost:Connect(function()
