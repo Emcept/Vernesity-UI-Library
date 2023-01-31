@@ -33,7 +33,7 @@ Window:Notify(<Title>, <Description>, <Arguments Table>, <Duration>, <Func>)
 #### For example, this would create a notification with 2 Buttons
 ```
 Window:Notify("Question", "Do you like this UI Library?", {"Yes", "No"}, 5, function(Text)
-if Text == "Yes" then print("Thank you!") else print(":(") end
+	if Text == "Yes" then print("Thank you!") else print(":(") end
 end)
 ```
 #### And this would create a notification with 1 ImageButton (you need to enter a valid ImageID)
