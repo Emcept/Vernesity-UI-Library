@@ -2191,7 +2191,6 @@ function Vernesity:Window(title1, title2, Theme)
 				TextBox.TextColor3 = theme.TextColor
 				TextBox.TextTransparency = 0.1
 				TextBox.Text = tostr(defaulttext)
-				TextBox.MultiLine = true
 				TextBox.Font = Enum.Font.Gotham
 				TextBox.Parent = TextBoxTemplate
 				local UICorner1 = Instance.new('UICorner')
