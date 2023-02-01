@@ -781,7 +781,7 @@ function Vernesity:Window(title1, title2, Theme)
 			})
 			for i, v in pairs(Tabs:GetChildren()) do
 				Tween(v, g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
-					Size = UDim2.new(0, v.Size.X.Offset, 0, 36)
+					Size = UDim2.new(0, v.Size.X.Offset, 0, 34)
 				})
 				Tween(v:FindFirstChild('Elements'), g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
 					Size = UDim2.new(0, v:FindFirstChild('Elements').Size.X.Offset, 0, 36)
@@ -2181,7 +2181,7 @@ function Vernesity:Window(title1, title2, Theme)
 				viewInfo.Parent = TextBoxTemplate
 				local TextBox = Instance.new('TextBox')
 				TextBox.Name = 'TextBox'
-				TextBox.AnchorPoint = Vector2.new(0.800000011920929, 0.5)
+				TextBox.AnchorPoint = Vector2.new(0.8, 0.5)
 				TextBox.Size = UDim2.new(0, 105, 0, 21)
 				TextBox.Position = UDim2.new(0.8, 0, 0, 20)
 				TextBox.BackgroundColor3 = theme.WindowColor
