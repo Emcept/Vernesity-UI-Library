@@ -63,13 +63,10 @@ function Tween(instance, speed, style, direction, props)
 end
 
 function checkDevice()
-	if game:GetService('UserInputService').TouchEnabled and game:GetService('UserInputService').MouseEnabled and game:GetService('UserInputService').KeyboardEnabled then
-		return 'Something'
-	elseif game:GetService('UserInputService').TouchEnabled and not game:GetService('UserInputService').MouseEnabled and not game:GetService('UserInputService').KeyboardEnabled then
+	if game:GetService('UserInputService').TouchEnabled then
 		return 'Mobile'
-	elseif not game:GetService('UserInputService').TouchEnabled and game:GetService('UserInputService').MouseEnabled and game:GetService('UserInputService').KeyboardEnabled then
+	else
 		return 'PC'
-	else return 'Unknown'
 	end
 end
 
@@ -456,7 +453,7 @@ function Vernesity:Window(title1, title2, Theme)
 	Dragger.BackgroundColor3 = theme.WindowColor
 	Dragger.Parent = Main
 	local UICorner2 = Instance.new('UICorner')
-	UICorner2.CornerRadius = UDim.new(0, 69)
+	UICorner2.CornerRadius = UDim.new(0, 5)
 	UICorner2.Parent = Dragger
 	local Value1 = Instance.new('StringValue')
 	Value1.Value = 'X'
@@ -767,11 +764,9 @@ function Vernesity:Window(title1, title2, Theme)
 		minimized = not minimized
 		onminimize(minimized)
 		if minimized then
-			if pui == nil and pmain == nil and pdropshadow == nil then
-				pui = UI.Size
-				pmain = Main.Size
-				pdropshadow = DropShadow.Size
-			end
+			pui = UI.Size
+			pmain = Main.Size
+			pdropshadow = DropShadow.Size
 			Tween(DropShadow, g - 0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
 				ImageTransparency = 1
 			})
@@ -784,6 +779,14 @@ function Vernesity:Window(title1, title2, Theme)
 			Tween(DropShadow, g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
 				Size = UDim2.new(0, DropShadow.Size.X.Offset, 0, 61)
 			})
+			for i, v in pairs(Tabs:GetChildren()) do
+				Tween(v, g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
+					Size = UDim2.new(0, v.Size.X.Offset, 0, 36)
+				})
+				Tween(v:FindFirstChild('Elements'), g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
+					Size = UDim2.new(0, v:FindFirstChild('Elements').Size.X.Offset, 0, 36)
+				})
+			end
 		else
 			Tween(DropShadow, g + 0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
 				ImageTransparency = shadowTransparency
@@ -797,6 +800,14 @@ function Vernesity:Window(title1, title2, Theme)
 			Tween(DropShadow, g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
 				Size = pdropshadow
 			})
+			for i, v in pairs(Tabs:GetChildren()) do
+				Tween(v, g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
+					Size = UDim2.new(pmain.X.Scale, pmain.X.Offset - 145, pmain.Y.Scale, pmain.Y.Offset - 35)
+				})
+				Tween(v:FindFirstChild('Elements'), g, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, {
+					Size = UDim2.new(pmain.X.Scale, pmain.X.Offset - 152, pmain.Y.Scale, pmain.Y.Offset - 41)
+				})
+			end
 		end
 	end)
 
@@ -1726,30 +1737,30 @@ function Vernesity:Window(title1, title2, Theme)
 				local Value1 = Instance.new('StringValue')
 				Value1.Value = 'X'
 				Value1.Parent = Button
-				local ViewInfo = Instance.new('ImageLabel')
-				ViewInfo.Name = 'ViewInfo'
-				ViewInfo.Selectable = true
-				ViewInfo.AnchorPoint = Vector2.new(0.97, 0.5)
-				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
-				ViewInfo.BackgroundTransparency = 1
-				ViewInfo.Position = UDim2.new(0.97, 0, 0, 20)
+				local viewInfo = Instance.new("TextButton")
+				viewInfo.Name = "viewInfo"
+				viewInfo.AnchorPoint = Vector2.new(1, 0)
+				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				viewInfo.BackgroundTransparency = 1
+				viewInfo.Position = UDim2.new(1, 0, 0, 0)
+				viewInfo.Size = UDim2.new(0, 43, 0, 40)
+				viewInfo.Font = Enum.Font.SourceSans
+				viewInfo.Text = ""
+				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
+				viewInfo.TextSize = 14
+				local ViewInfo = Instance.new("ImageLabel")
+				ViewInfo.Name = "ViewInfo"
 				ViewInfo.Active = true
+				ViewInfo.AnchorPoint = Vector2.new(0.5, 0.5)
+				ViewInfo.BackgroundTransparency = 1
+				ViewInfo.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ViewInfo.Selectable = true
+				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
+				ViewInfo.Image = "rbxassetid://3926305904"
+				ViewInfo.ImageColor3 = theme.TextColor
 				ViewInfo.ImageRectOffset = Vector2.new(564, 284)
 				ViewInfo.ImageRectSize = Vector2.new(36, 36)
-				ViewInfo.Image = 'rbxassetid://3926305904'
-				ViewInfo.Parent = ButtonTemplate
-				ViewInfo.ImageColor3 = theme.TextColor
-				local viewInfo = Instance.new('TextButton')
-				viewInfo.Name = 'viewInfo'
-				viewInfo.Size = UDim2.new(0, 43, 0, 40)
-				viewInfo.BackgroundTransparency = 1
-				viewInfo.Position = UDim2.new(0.869, 0, 0, 0)
-				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				viewInfo.FontSize = Enum.FontSize.Size14
-				viewInfo.TextSize = 14
-				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
-				viewInfo.Text = ''
-				viewInfo.Font = Enum.Font.SourceSans
+				ViewInfo.Parent = viewInfo
 				viewInfo.Parent = ButtonTemplate
 				local Info = Instance.new('TextLabel')
 				Info.Name = 'Info'
@@ -1875,30 +1886,30 @@ function Vernesity:Window(title1, title2, Theme)
 				local Value1 = Instance.new('StringValue')
 				Value1.Value = 'X'
 				Value1.Parent = Button
-				local ViewInfo = Instance.new('ImageLabel')
-				ViewInfo.Name = 'ViewInfo'
-				ViewInfo.Selectable = true
-				ViewInfo.AnchorPoint = Vector2.new(0.9700000286102295, 0.5)
-				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
-				ViewInfo.BackgroundTransparency = 1
-				ViewInfo.Position = UDim2.new(0.97, 0, 0, 20)
+				local viewInfo = Instance.new("TextButton")
+				viewInfo.Name = "viewInfo"
+				viewInfo.AnchorPoint = Vector2.new(1, 0)
+				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				viewInfo.BackgroundTransparency = 1
+				viewInfo.Position = UDim2.new(1, 0, 0, 0)
+				viewInfo.Size = UDim2.new(0, 43, 0, 40)
+				viewInfo.Font = Enum.Font.SourceSans
+				viewInfo.Text = ""
+				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
+				viewInfo.TextSize = 14
+				local ViewInfo = Instance.new("ImageLabel")
+				ViewInfo.Name = "ViewInfo"
 				ViewInfo.Active = true
+				ViewInfo.AnchorPoint = Vector2.new(0.5, 0.5)
+				ViewInfo.BackgroundTransparency = 1
+				ViewInfo.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ViewInfo.Selectable = true
+				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
+				ViewInfo.Image = "rbxassetid://3926305904"
+				ViewInfo.ImageColor3 = theme.TextColor
 				ViewInfo.ImageRectOffset = Vector2.new(564, 284)
 				ViewInfo.ImageRectSize = Vector2.new(36, 36)
-				ViewInfo.Image = 'rbxassetid://3926305904'
-				ViewInfo.ImageColor3 = theme.TextColor
-				ViewInfo.Parent = InteractableTemplate
-				local viewInfo = Instance.new('TextButton')
-				viewInfo.Name = 'viewInfo'
-				viewInfo.Size = UDim2.new(0, 43, 0, 40)
-				viewInfo.BackgroundTransparency = 1
-				viewInfo.Position = UDim2.new(0.8689024, 0, 0, 0)
-				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				viewInfo.FontSize = Enum.FontSize.Size14
-				viewInfo.TextSize = 14
-				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
-				viewInfo.Text = ''
-				viewInfo.Font = Enum.Font.SourceSans
+				ViewInfo.Parent = viewInfo
 				viewInfo.Parent = InteractableTemplate
 				local Interactable = Instance.new('TextButton')
 				Interactable.Name = 'Interactable'
@@ -2143,29 +2154,30 @@ function Vernesity:Window(title1, title2, Theme)
 				local Value = Instance.new('StringValue')
 				Value.Value = 'X'
 				Value.Parent = Text
-				local ViewInfo = Instance.new('ImageLabel')
-				ViewInfo.Name = 'ViewInfo'
-				ViewInfo.Selectable = true
-				ViewInfo.AnchorPoint = Vector2.new(0.9700000286102295, 0.5)
-				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
-				ViewInfo.BackgroundTransparency = 1
-				ViewInfo.Position = UDim2.new(0.97, 0, 0, 20)
+				local viewInfo = Instance.new("TextButton")
+				viewInfo.Name = "viewInfo"
+				viewInfo.AnchorPoint = Vector2.new(1, 0)
+				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				viewInfo.BackgroundTransparency = 1
+				viewInfo.Position = UDim2.new(1, 0, 0, 0)
+				viewInfo.Size = UDim2.new(0, 43, 0, 40)
+				viewInfo.Font = Enum.Font.SourceSans
+				viewInfo.Text = ""
+				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
+				viewInfo.TextSize = 14
+				local ViewInfo = Instance.new("ImageLabel")
+				ViewInfo.Name = "ViewInfo"
 				ViewInfo.Active = true
+				ViewInfo.AnchorPoint = Vector2.new(0.5, 0.5)
+				ViewInfo.BackgroundTransparency = 1
+				ViewInfo.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ViewInfo.Selectable = true
+				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
+				ViewInfo.Image = "rbxassetid://3926305904"
+				ViewInfo.ImageColor3 = theme.TextColor
 				ViewInfo.ImageRectOffset = Vector2.new(564, 284)
 				ViewInfo.ImageRectSize = Vector2.new(36, 36)
-				ViewInfo.Image = 'rbxassetid://3926305904'
-				ViewInfo.Parent = TextBoxTemplate
-				ViewInfo.ImageColor3 = theme.TextColor
-				local viewInfo = Instance.new('TextButton')
-				viewInfo.Name = 'viewInfo'
-				viewInfo.Size = UDim2.new(0, 328, 0, 40)
-				viewInfo.BackgroundTransparency = 1
-				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				viewInfo.FontSize = Enum.FontSize.Size14
-				viewInfo.TextSize = 14
-				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
-				viewInfo.Text = ''
-				viewInfo.Font = Enum.Font.SourceSans
+				ViewInfo.Parent = viewInfo
 				viewInfo.Parent = TextBoxTemplate
 				local TextBox = Instance.new('TextBox')
 				TextBox.Name = 'TextBox'
@@ -2289,19 +2301,31 @@ function Vernesity:Window(title1, title2, Theme)
 				local UICorner = Instance.new('UICorner')
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = SliderTemplate
-				local ViewInfo = Instance.new('ImageLabel')
-				ViewInfo.Name = 'ViewInfo'
-				ViewInfo.Selectable = true
-				ViewInfo.AnchorPoint = Vector2.new(0.97, 0.2)
-				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
-				ViewInfo.BackgroundTransparency = 1
-				ViewInfo.Position = UDim2.new(0.97, 0, 0, 11)
+				local viewInfo = Instance.new("TextButton")
+				viewInfo.Name = "viewInfo"
+				viewInfo.AnchorPoint = Vector2.new(1, 0)
+				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				viewInfo.BackgroundTransparency = 1
+				viewInfo.Position = UDim2.new(1, 0, 0, 0)
+				viewInfo.Size = UDim2.new(0, 43, 0, 40)
+				viewInfo.Font = Enum.Font.SourceSans
+				viewInfo.Text = ""
+				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
+				viewInfo.TextSize = 14
+				local ViewInfo = Instance.new("ImageLabel")
+				ViewInfo.Name = "ViewInfo"
 				ViewInfo.Active = true
+				ViewInfo.AnchorPoint = Vector2.new(0.5, 0.5)
+				ViewInfo.BackgroundTransparency = 1
+				ViewInfo.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ViewInfo.Selectable = true
+				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
+				ViewInfo.Image = "rbxassetid://3926305904"
+				ViewInfo.ImageColor3 = theme.TextColor
 				ViewInfo.ImageRectOffset = Vector2.new(564, 284)
 				ViewInfo.ImageRectSize = Vector2.new(36, 36)
-				ViewInfo.ImageColor3 = theme.TextColor
-				ViewInfo.Image = 'rbxassetid://3926305904'
-				ViewInfo.Parent = SliderTemplate
+				ViewInfo.Parent = viewInfo
+				viewInfo.Parent = SliderTemplate
 				local Button = Instance.new('TextButton')
 				Button.Name = 'Button'
 				Button.Active = true
@@ -2429,7 +2453,7 @@ function Vernesity:Window(title1, title2, Theme)
 					Tween(bar, 0.05, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
 						Size = UDim2.new(math.clamp((mouse.X - Slider.AbsolutePosition.X)/Slider.AbsoluteSize.X,0,1),0,1,0)
 					})
-					task.wait(0.05)
+					task.wait(0.06)
 					percentage = math.floor(((bar.Size.X.Scale * maxval) / maxval) * (maxval - minval) + minval)
 					textbox.Text = percentage
 				end)
@@ -2443,7 +2467,7 @@ function Vernesity:Window(title1, title2, Theme)
 						Tween(bar, 0.05, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
 							Size = UDim2.new(math.clamp((mouse.X - Slider.AbsolutePosition.X)/Slider.AbsoluteSize.X,0,1),0,1,0)
 						})
-						task.wait(0.05)
+						task.wait(0.06)
 						percentage = math.floor(((bar.Size.X.Scale * maxval) / maxval) * (maxval - minval) + minval)
 						textbox.Text = percentage
 					end
@@ -2534,23 +2558,37 @@ function Vernesity:Window(title1, title2, Theme)
 				ColorPickerTemplate.ClipsDescendants = true
 				ColorPickerTemplate.Position = UDim2.new(0.43, 0, 0.51, 0)
 				ColorPickerTemplate.BorderSizePixel = 0
+				ColorPickerTemplate.Active = true
 				ColorPickerTemplate.BackgroundColor3 = theme.ElementColor
 				local UICorner = Instance.new('UICorner')
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = ColorPickerTemplate
-				local ViewInfo = Instance.new('ImageLabel')
-				ViewInfo.Name = 'ViewInfo'
-				ViewInfo.Selectable = true
-				ViewInfo.AnchorPoint = Vector2.new(0.97, 0.5)
-				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
-				ViewInfo.BackgroundTransparency = 1
-				ViewInfo.Position = UDim2.new(0.97, 0, 0, 20)
+				local viewInfo = Instance.new("TextButton")
+				viewInfo.Name = "viewInfo"
+				viewInfo.Active = true
+				viewInfo.AnchorPoint = Vector2.new(1, 0)
+				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				viewInfo.BackgroundTransparency = 1
+				viewInfo.Position = UDim2.new(1, 0, 0, 0)
+				viewInfo.Size = UDim2.new(0, 43, 0, 40)
+				viewInfo.Font = Enum.Font.SourceSans
+				viewInfo.Text = ""
+				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
+				viewInfo.TextSize = 14
+				local ViewInfo = Instance.new("ImageLabel")
+				ViewInfo.Name = "ViewInfo"
 				ViewInfo.Active = true
+				ViewInfo.AnchorPoint = Vector2.new(0.5, 0.5)
+				ViewInfo.BackgroundTransparency = 1
+				ViewInfo.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ViewInfo.Selectable = true
+				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
+				ViewInfo.Image = "rbxassetid://3926305904"
+				ViewInfo.ImageColor3 = theme.TextColor
 				ViewInfo.ImageRectOffset = Vector2.new(564, 284)
 				ViewInfo.ImageRectSize = Vector2.new(36, 36)
-				ViewInfo.Image = 'rbxassetid://3926305904'
-				ViewInfo.Parent = ColorPickerTemplate
-				ViewInfo.ImageColor3 = theme.TextColor
+				ViewInfo.Parent = viewInfo
+				viewInfo.Parent = ColorPickerTemplate
 				local Button = Instance.new('TextButton')
 				Button.Name = 'Button'
 				Button.Size = setElementSizeX(UDim2.new(0, 328, 0, 40))
@@ -2558,6 +2596,7 @@ function Vernesity:Window(title1, title2, Theme)
 				Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Button.FontSize = Enum.FontSize.Size14
 				Button.TextSize = 14
+				Button.ZIndex = 2
 				Button.TextColor3 = Color3.fromRGB(0, 0, 0)
 				Button.Text = ''
 				Button.Font = Enum.Font.SourceSans
@@ -2577,6 +2616,7 @@ function Vernesity:Window(title1, title2, Theme)
 				Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Text.FontSize = Enum.FontSize.Size14
 				Text.TextSize = 14
+				Text.Active = true
 				Text.TextColor3 = theme.TextColor
 				Text.Text = tostr(name)
 				Text.TextTransparency = 0.1
@@ -2596,6 +2636,7 @@ function Vernesity:Window(title1, title2, Theme)
 				Info.FontSize = Enum.FontSize.Size14
 				Info.TextTransparency = 0.2
 				Info.TextSize = 13
+				Info.Active = true
 				Info.TextColor3 = theme.TextColor
 				Info.Text = tostr(info)
 				Info.TextYAlignment = Enum.TextYAlignment.Top
@@ -2608,6 +2649,7 @@ function Vernesity:Window(title1, title2, Theme)
 				local Preview = Instance.new('Frame')
 				Preview.Name = 'Preview'
 				Preview.ZIndex = 4
+				Preview.Active = true
 				Preview.AnchorPoint = Vector2.new(0.5, 0.54)
 				Preview.Size = UDim2.new(0, 20, 0, 119)
 				Preview.BorderColor3 = Color3.fromRGB(40, 40, 40)
@@ -2688,6 +2730,7 @@ function Vernesity:Window(title1, title2, Theme)
 				ApplyButton.BackgroundColor3 = theme.SecondaryElementColor
 				ApplyButton.FontSize = Enum.FontSize.Size14
 				ApplyButton.TextSize = 14
+				ApplyButton.Active = true
 				ApplyButton.TextColor3 = theme.TextColor
 				ApplyButton.Text = 'Apply'
 				ApplyButton.Font = Enum.Font.GothamMedium
@@ -2707,6 +2750,7 @@ function Vernesity:Window(title1, title2, Theme)
 				local selectedColor = Color3.fromHSV(1,1,1)
 				local colorData = {1,1,1}
 				local mouse1down = false
+				local mouse1down2 = false
 				Preview.BackgroundColor3 = defaultcolor
 				CoolValue.ImageColor3 = defaultcolor
 				local function setColor(hue,sat,val)
@@ -2729,7 +2773,7 @@ function Vernesity:Window(title1, title2, Theme)
 							rgb:WaitForChild('Marker').Position = UDim2.new(x,0,y,0)
 							setColor(1 - x,1 - y)
 						end
-
+					elseif mouse1down2 then
 						local x,y = inBounds(value)
 						if x and y then
 							value:WaitForChild('Marker').Position = UDim2.new(0.5,0,y,0)
@@ -2738,28 +2782,32 @@ function Vernesity:Window(title1, title2, Theme)
 					end
 				end
 				RGB.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-						mouse1down = true
-						input.Changed:Connect(function()
-							if input.UserInputState == Enum.UserInputState.End then
-								mouse1down = false
-							end
-						end)
+					if mouse1down2 == false then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+							mouse1down = true
+							input.Changed:Connect(function()
+								if input.UserInputState == Enum.UserInputState.End then
+									mouse1down = false
+								end
+							end)
+						end
 					end
 				end)
 				CoolValue.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-						mouse1down = true
-						input.Changed:Connect(function()
-							if input.UserInputState == Enum.UserInputState.End then
-								mouse1down = false
-							end
-						end)
+					if mouse1down == false then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+							mouse1down2 = true
+							input.Changed:Connect(function()
+								if input.UserInputState == Enum.UserInputState.End then
+									mouse1down2 = false
+								end
+							end)
+						end
 					end
 				end)
 				UIS.InputChanged:Connect(function(input)
 					if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-						if mouse1down then
+						if mouse1down or mouse1down2 then
 							updateRGB()
 						end
 					end
@@ -2802,7 +2850,6 @@ function Vernesity:Window(title1, title2, Theme)
 					end
 				end
 				Button.MouseButton1Click:Connect(a)
-
 				function colorpicker:Edit(newName, newInfo, newDefaultColor, newFunc)
 					colorpicker[name] = newName
 					FUNC = newFunc
@@ -2839,33 +2886,45 @@ function Vernesity:Window(title1, title2, Theme)
 				local UICorner = Instance.new('UICorner')
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = ToggleTemplate
-				local ViewInfo = Instance.new('ImageLabel')
-				ViewInfo.Name = 'ViewInfo'
-				ViewInfo.Selectable = true
-				ViewInfo.AnchorPoint = Vector2.new(0.97, 0.5)
-				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
-				ViewInfo.BackgroundTransparency = 1
-				ViewInfo.Position = UDim2.new(0.97, 0, 0, 20)
+				local viewInfo = Instance.new("TextButton")
+				viewInfo.Name = "viewInfo"
+				viewInfo.AnchorPoint = Vector2.new(1, 0)
+				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				viewInfo.BackgroundTransparency = 1
+				viewInfo.Position = UDim2.new(1, 0, 0, 0)
+				viewInfo.Size = UDim2.new(0, 43, 0, 40)
+				viewInfo.Font = Enum.Font.SourceSans
+				viewInfo.Text = ""
+				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
+				viewInfo.TextSize = 14
+				local ViewInfo = Instance.new("ImageLabel")
+				ViewInfo.Name = "ViewInfo"
 				ViewInfo.Active = true
+				ViewInfo.AnchorPoint = Vector2.new(0.5, 0.5)
+				ViewInfo.BackgroundTransparency = 1
+				ViewInfo.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ViewInfo.Selectable = true
+				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
+				ViewInfo.Image = "rbxassetid://3926305904"
+				ViewInfo.ImageColor3 = theme.TextColor
 				ViewInfo.ImageRectOffset = Vector2.new(564, 284)
 				ViewInfo.ImageRectSize = Vector2.new(36, 36)
-				ViewInfo.Image = 'rbxassetid://3926305904'
-				ViewInfo.ImageColor3 = theme.TextColor
-				ViewInfo.Parent = ToggleTemplate
-				local Button = Instance.new('TextButton')
-				Button.Name = 'Button'
-				Button.Size = setElementSizeX(UDim2.new(0, 328, 0, 40))
-				Button.BackgroundTransparency = 1
-				Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				Button.FontSize = Enum.FontSize.Size14
-				Button.TextSize = 14
-				Button.TextColor3 = Color3.fromRGB(0, 0, 0)
-				Button.Text = ''
-				Button.Font = Enum.Font.SourceSans
-				Button.Parent = ToggleTemplate
+				ViewInfo.Parent = viewInfo
+				viewInfo.Parent = ToggleTemplate
+				local Button2 = Instance.new("TextButton")
+				Button2.Name = "Button2"
+				Button2.Size = setElementSizeX(UDim2.new(0, 290, 0, 40))
+				Button2.BackgroundTransparency = 1
+				Button2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Button2.FontSize = Enum.FontSize.Size14
+				Button2.TextSize = 14
+				Button2.TextColor3 = Color3.fromRGB(0, 0, 0)
+				Button2.Text = ""
+				Button2.Font = Enum.Font.SourceSans
+				Button2.Parent = ToggleTemplate
 				local Value = Instance.new('StringValue')
 				Value.Value = 'X'
-				Value.Parent = Button
+				Value.Parent = Button2
 				local Text = Instance.new('TextLabel')
 				Text.Name = 'Text'
 				Text.AnchorPoint = Vector2.new(0.12, 0.5)
@@ -2984,7 +3043,7 @@ function Vernesity:Window(title1, title2, Theme)
 						})
 					end
 				end
-				Button.MouseButton1Click:Connect(a)
+				Button2.MouseButton1Click:Connect(a)
 				ToggleBtn.MouseButton1Click:Connect(function()
 					Toggled = not Toggled
 					FUNC(Toggled)
@@ -3038,19 +3097,31 @@ function Vernesity:Window(title1, title2, Theme)
 				local UICorner = Instance.new('UICorner')
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = SwitchTemplate
-				local ViewInfo = Instance.new('ImageLabel')
-				ViewInfo.Name = 'ViewInfo'
-				ViewInfo.Selectable = true
-				ViewInfo.AnchorPoint = Vector2.new(0.97, 0.5)
-				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
-				ViewInfo.BackgroundTransparency = 1
-				ViewInfo.Position = UDim2.new(0.97, 0, 0, 20)
+				local viewInfo = Instance.new("TextButton")
+				viewInfo.Name = "viewInfo"
+				viewInfo.AnchorPoint = Vector2.new(1, 0)
+				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				viewInfo.BackgroundTransparency = 1
+				viewInfo.Position = UDim2.new(1, 0, 0, 0)
+				viewInfo.Size = UDim2.new(0, 43, 0, 40)
+				viewInfo.Font = Enum.Font.SourceSans
+				viewInfo.Text = ""
+				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
+				viewInfo.TextSize = 14
+				local ViewInfo = Instance.new("ImageLabel")
+				ViewInfo.Name = "ViewInfo"
 				ViewInfo.Active = true
+				ViewInfo.AnchorPoint = Vector2.new(0.5, 0.5)
+				ViewInfo.BackgroundTransparency = 1
+				ViewInfo.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ViewInfo.Selectable = true
+				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
+				ViewInfo.Image = "rbxassetid://3926305904"
+				ViewInfo.ImageColor3 = theme.TextColor
 				ViewInfo.ImageRectOffset = Vector2.new(564, 284)
 				ViewInfo.ImageRectSize = Vector2.new(36, 36)
-				ViewInfo.Image = 'rbxassetid://3926305904'
-				ViewInfo.ImageColor3 = theme.TextColor
-				ViewInfo.Parent = SwitchTemplate
+				ViewInfo.Parent = viewInfo
+				viewInfo.Parent = SwitchTemplate
 				local Switch = Instance.new('Frame')
 				Switch.Name = 'Switch'
 				Switch.AnchorPoint = Vector2.new(0.85, 0.5)
@@ -3084,25 +3155,10 @@ function Vernesity:Window(title1, title2, Theme)
 				Circle.Text = ''
 				Circle.Font = Enum.Font.SourceSans
 				Circle.Parent = Switch
-				local Button1 = Instance.new("TextButton")
-				Button1.Name = "Button1"
-				Button1.AnchorPoint = Vector2.new(1, 0)
-				Button1.Size = setElementSizeX(UDim2.new(0, 38, 0, 40))
-				Button1.BackgroundTransparency = 1
-				Button1.Position = UDim2.new(1, 0, 0, 0)
-				Button1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				Button1.FontSize = Enum.FontSize.Size14
-				Button1.TextSize = 14
-				Button1.TextColor3 = Color3.fromRGB(0, 0, 0)
-				Button1.Text = ""
-				Button1.Font = Enum.Font.SourceSans
-				local Value = Instance.new("StringValue")
-				Value.Value = "X"
-				Value.Parent = Button1
-				Button1.Parent = SwitchTemplate
+				viewInfo.Parent = SwitchTemplate
 				local Button2 = Instance.new("TextButton")
 				Button2.Name = "Button2"
-				Button2.Size = UDim2.new(0, 290, 0, 40)
+				Button2.Size = setElementSizeX(UDim2.new(0, 290, 0, 40))
 				Button2.BackgroundTransparency = 1
 				Button2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Button2.FontSize = Enum.FontSize.Size14
@@ -3195,7 +3251,7 @@ function Vernesity:Window(title1, title2, Theme)
 						})
 					end
 				end
-				Button1.MouseButton1Click:Connect(a)
+				viewInfo.MouseButton1Click:Connect(a)
 				Button2.MouseButton1Click:Connect(function()
 					Toggled = not Toggled
 					BoolValue.Value = Toggled
@@ -3265,19 +3321,31 @@ function Vernesity:Window(title1, title2, Theme)
 				local UICorner = Instance.new('UICorner')
 				UICorner.CornerRadius = UDim.new(0, 4)
 				UICorner.Parent = KeybindTemplate
-				local ViewInfo = Instance.new('ImageLabel')
-				ViewInfo.Name = 'ViewInfo'
-				ViewInfo.Selectable = true
-				ViewInfo.AnchorPoint = Vector2.new(0.97, 0.5)
-				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
-				ViewInfo.BackgroundTransparency = 1
-				ViewInfo.Position = UDim2.new(0.97, 0, 0, 20)
+				local viewInfo = Instance.new("TextButton")
+				viewInfo.Name = "viewInfo"
+				viewInfo.AnchorPoint = Vector2.new(1, 0)
+				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				viewInfo.BackgroundTransparency = 1
+				viewInfo.Position = UDim2.new(1, 0, 0, 0)
+				viewInfo.Size = UDim2.new(0, 43, 0, 40)
+				viewInfo.Font = Enum.Font.SourceSans
+				viewInfo.Text = ""
+				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
+				viewInfo.TextSize = 14
+				local ViewInfo = Instance.new("ImageLabel")
+				ViewInfo.Name = "ViewInfo"
 				ViewInfo.Active = true
+				ViewInfo.AnchorPoint = Vector2.new(0.5, 0.5)
+				ViewInfo.BackgroundTransparency = 1
+				ViewInfo.Position = UDim2.new(0.5, 0, 0.5, 0)
+				ViewInfo.Selectable = true
+				ViewInfo.Size = UDim2.new(0, 22, 0, 22)
+				ViewInfo.Image = "rbxassetid://3926305904"
+				ViewInfo.ImageColor3 = theme.TextColor
 				ViewInfo.ImageRectOffset = Vector2.new(564, 284)
 				ViewInfo.ImageRectSize = Vector2.new(36, 36)
-				ViewInfo.ImageColor3 = theme.TextColor
-				ViewInfo.Image = 'rbxassetid://3926305904'
-				ViewInfo.Parent = KeybindTemplate
+				ViewInfo.Parent = viewInfo
+				viewInfo.Parent = KeybindTemplate
 				local Button = Instance.new('TextButton')
 				Button.Name = 'Button'
 				Button.Size = setElementSizeX(UDim2.new(0, 328, 0, 40))
@@ -3335,7 +3403,7 @@ function Vernesity:Window(title1, title2, Theme)
 					UIStroke.Parent = MobileKeybind
 					keybindinput = MobileKeybind
 				end
-				if device == 'PC' or device == 'Unknown' or device == 'Something' then
+				if device == 'PC' then
 					local Keybind = Instance.new('TextButton')
 					Keybind.Name = 'Keybind'
 					Keybind.AnchorPoint = Vector2.new(0.85, 0.5)
@@ -3448,7 +3516,7 @@ function Vernesity:Window(title1, title2, Theme)
 					wait(len+0.1)
 					c:Destroy()
 				end
-				if device == 'PC' or device == 'Unknown' or device == 'Something' then
+				if device == 'PC' then
 					keybindinput.MouseButton1Click:Connect(function()
 						choosing = true
 						Tween(keybindinput:FindFirstChild('UIStroke'), 0.35, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
@@ -3639,6 +3707,32 @@ function Vernesity:Window(title1, title2, Theme)
 				UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 				UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 				UIListLayout.Parent = Objects
+				local viewInfo = Instance.new("TextButton")
+				viewInfo.Name = "viewInfo"
+				viewInfo.AnchorPoint = Vector2.new(1, 0)
+				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				viewInfo.BackgroundTransparency = 1
+				viewInfo.Position = UDim2.new(1, 0, 0, 0)
+				viewInfo.Size = UDim2.new(0, 43, 0, 40)
+				viewInfo.Font = Enum.Font.SourceSans
+				viewInfo.Text = ""
+				viewInfo.TextColor3 = Color3.fromRGB(0, 0, 0)
+				viewInfo.TextSize = 14
+				local DropdownButton = Instance.new('ImageLabel')
+				DropdownButton.Name = 'DropdownButton'
+				DropdownButton.LayoutOrder = 4
+				DropdownButton.Selectable = true
+				DropdownButton.AnchorPoint = Vector2.new(0.5, 0.5)
+				DropdownButton.Size = UDim2.new(0, 22, 0, 22)
+				DropdownButton.BackgroundTransparency = 1
+				DropdownButton.Position = UDim2.new(0.5, 0, 0.5, 0)
+				DropdownButton.Active = true
+				DropdownButton.ImageRectOffset = Vector2.new(324, 524)
+				DropdownButton.ImageRectSize = Vector2.new(36, 36)
+				DropdownButton.Image = 'rbxassetid://3926307971'
+				DropdownButton.ImageColor3 = theme.TextColor
+				DropdownButton.Parent = viewInfo
+				viewInfo.Parent = DropdownTemplate
 				local Buttons = Instance.new('Frame')
 				Buttons.Name = 'Buttons'
 				Buttons.Size = setElementSizeX(UDim2.new(0, 328, 0, 40))
@@ -3646,20 +3740,6 @@ function Vernesity:Window(title1, title2, Theme)
 				Buttons.BorderSizePixel = 0
 				Buttons.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Buttons.Parent = DropdownTemplate
-				local DropdownButton = Instance.new('ImageLabel')
-				DropdownButton.Name = 'DropdownButton'
-				DropdownButton.LayoutOrder = 4
-				DropdownButton.Selectable = true
-				DropdownButton.AnchorPoint = Vector2.new(0.97, 0.5)
-				DropdownButton.Size = UDim2.new(0, 22, 0, 22)
-				DropdownButton.BackgroundTransparency = 1
-				DropdownButton.Position = UDim2.new(0.97, 0, 0.5, 0)
-				DropdownButton.Active = true
-				DropdownButton.ImageRectOffset = Vector2.new(324, 524)
-				DropdownButton.ImageRectSize = Vector2.new(36, 36)
-				DropdownButton.Image = 'rbxassetid://3926307971'
-				DropdownButton.ImageColor3 = theme.TextColor
-				DropdownButton.Parent = Buttons
 				local Button = Instance.new('TextButton')
 				Button.Name = 'Button'
 				Button.Size = setElementSizeX(UDim2.new(0, 328, 0, 40))
