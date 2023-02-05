@@ -3813,7 +3813,7 @@ function Vernesity:Window(title1, title2, Theme)
 					if amountOfButtons > 5 then
 						size = 130
 						local canvas = Objects.CanvasSize
-						Objects.CanvasSize = UDim2.new(canvas.X.Scale, canvas.X.Offset, canvas.Y.Scale, 105 + (amountOfButtons - 4) * 25)
+						Objects.CanvasSize = UDim2.new(canvas.X.Scale, canvas.X.Offset, canvas.Y.Scale, 130 + (amountOfButtons - 5) * 25)
 					end
 					if amountOfButtons == 5 then
 						size = 130
