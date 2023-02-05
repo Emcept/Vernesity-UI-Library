@@ -3810,10 +3810,16 @@ function Vernesity:Window(title1, title2, Theme)
 				local idk = 0.5
 				local style, dir = Enum.EasingStyle.Quad, Enum.EasingDirection.InOut
 				local function changeSize()
-					if amountOfButtons > 3 then
-						size = 80
+					if amountOfButtons > 5 then
+						size = 130
 						local canvas = Objects.CanvasSize
 						Objects.CanvasSize = UDim2.new(canvas.X.Scale, canvas.X.Offset, canvas.Y.Scale, 105 + (amountOfButtons - 4) * 25)
+					end
+					if amountOfButtons == 5 then
+						size = 130
+					end
+					if amountOfButtons == 4 then
+						size = 105
 					end
 					if amountOfButtons == 3 then
 						size = 80
