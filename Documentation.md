@@ -151,7 +151,7 @@ local theme = Window:GetTheme()
 ### Adding themes
 #### There are 2 ways to add themes:
 ```Lua
-local Window = Library:Window("Vernesity", "Game Name", {
+local Window = Library:Window("Title", "Subtitle", {
 	TextColor = Color3.fromRGB(235, 235, 235),
 	WindowColor = Color3.fromRGB(49, 49, 27),
 	TabColor = Color3.fromRGB(71, 71, 40),
@@ -170,7 +170,7 @@ Library:AddTheme("AwfulTheme", {
 	ElementColor = Color3.fromRGB(100, 100, 54),
 	SecondaryElementColor = Color3.fromRGB(236, 236, 104)
 })
-local Window = Library:Window("Vernesity", "Game Name", "AwfulTheme")
+local Window = Library:Window("Title", "Subtitle", "AwfulTheme")
 ```
 
 ### If you want to change the theme, there are 2 ways to do it:
@@ -179,7 +179,7 @@ Window:ChangeTheme(<theme>)
 ```
 #### or
 ```Lua
-Window:Edit("Title", "Game Name", <theme>)
+Window:Edit("Title", "Subtitle", <theme>)
 ```
 <br />
 
@@ -197,7 +197,7 @@ Windows:SetShadowTransparency(<Number 0-1>)
 ```
 ### Example:
 ```Lua
-local Window = Library:Window("Vernesity", "Game Name", "DarkTheme")
+local Window = Library:Window("Title", "Subtitle", "DarkTheme")
 Window:Edit("New Title", "New Subtitle", "PurpleTheme")
 ```
 <br /><br />
@@ -208,7 +208,7 @@ Window:Edit("New Title", "New Subtitle", "PurpleTheme")
 ```
 ### Example:
 ```Lua
-local Window = Library:Window("Vernesity", "Game Name", "DarkTheme")
+local Window = Library:Window("Title", "Subtitle", "DarkTheme")
 Window:Remove()
 ```
 <br /><br />
@@ -240,7 +240,7 @@ end)
 ## EXAMPLE CODE:
 ```Lua
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Emcept/Vernesity-UI-Library/main/source.lua"))()
-local Window = Library:Window("Vernesity", "Game Name", "DarkTheme")
+local Window = Library:Window("Title", "Subtitle", "DarkTheme")
 local Tab = Window:Tab("Tab 1")
 local SettingsTab = Window:Tab("Settings", 10846926154)
 local Section = Tab:Section("Main")
