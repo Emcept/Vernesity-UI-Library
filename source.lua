@@ -127,20 +127,20 @@ function Vernesity:EnableKeySystem(title, subtitle, note, key)
 	Note.TextWrap = true
 	Note.TextXAlignment = Enum.TextXAlignment.Left
 	Note.Parent = Main
-	local Title2 = Instance.new('TextLabel')
-	Title2.Name = 'Title2'
-	Title2.Size = UDim2.new(0, 150, 0, 40)
-	Title2.BackgroundTransparency = 1
-	Title2.Position = UDim2.new(0, 13, 0, 20)
-	Title2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Title2.FontSize = Enum.FontSize.Size14
-	Title2.TextTransparency = 1
-	Title2.TextSize = 13
-	Title2.TextColor3 = Color3.fromRGB(235, 235, 235)
-	Title2.Text = tostr(subtitle)
-	Title2.Font = Enum.Font.Gotham
-	Title2.TextXAlignment = Enum.TextXAlignment.Left
-	Title2.Parent = Main
+	local Subtitle = Instance.new('TextLabel')
+	Subtitle.Name = 'Subtitle'
+	Subtitle.Size = UDim2.new(0, 150, 0, 40)
+	Subtitle.BackgroundTransparency = 1
+	Subtitle.Position = UDim2.new(0, 13, 0, 20)
+	Subtitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Subtitle.FontSize = Enum.FontSize.Size14
+	Subtitle.TextTransparency = 1
+	Subtitle.TextSize = 13
+	Subtitle.TextColor3 = Color3.fromRGB(235, 235, 235)
+	Subtitle.Text = tostr(subtitle)
+	Subtitle.Font = Enum.Font.Gotham
+	Subtitle.TextXAlignment = Enum.TextXAlignment.Left
+	Subtitle.Parent = Main
 	local TextBox = Instance.new('TextBox')
 	TextBox.AnchorPoint = Vector2.new(0.8, 0.5)
 	TextBox.Size = UDim2.new(0, 150, 0, 21)
@@ -232,7 +232,7 @@ function Vernesity:EnableKeySystem(title, subtitle, note, key)
 	Tween(Title, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
 		TextTransparency = 0
 	})
-	Tween(Title2, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+	Tween(Subtitle, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
 		TextTransparency = 0.2
 	})
 	local function close()
@@ -255,7 +255,7 @@ function Vernesity:EnableKeySystem(title, subtitle, note, key)
 		Tween(Title, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
 			TextTransparency = 1
 		})
-		Tween(Title2, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+		Tween(Subtitle, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
 			TextTransparency = 1
 		})
 		wait(speed/2)
@@ -380,7 +380,7 @@ function Vernesity:MakeDraggable(obj, Dragger, smoothness)
 	end)
 end
 
-function Vernesity:Window(title1, title2, Theme)
+function Vernesity:Window(title1, subtitle, Theme)
 	loadFunction()
 	local DragNumber = 0
 	local theme = Theme or Vernesity.Themes.DarkTheme
@@ -532,20 +532,20 @@ function Vernesity:Window(title1, title2, Theme)
 	Title.Font = Enum.Font.GothamMedium
 	Title.TextXAlignment = Enum.TextXAlignment.Left
 	Title.Parent = LeftSide
-	local Title2 = Instance.new('TextLabel')
-	Title2.Name = 'Title2'
-	Title2.Size = UDim2.new(0, 150, 0, 40)
-	Title2.BackgroundTransparency = 1
-	Title2.Position = UDim2.new(0, 13, 0, 20)
-	Title2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Title2.FontSize = Enum.FontSize.Size14
-	Title2.TextTransparency = 0.2
-	Title2.TextSize = 13
-	Title2.TextColor3 = theme.TextColor
-	Title2.Text = tostr(title2)
-	Title2.Font = Enum.Font.Gotham
-	Title2.TextXAlignment = Enum.TextXAlignment.Left
-	Title2.Parent = LeftSide
+	local Subtitle = Instance.new('TextLabel')
+	Subtitle.Name = 'Subtitle'
+	Subtitle.Size = UDim2.new(0, 150, 0, 40)
+	Subtitle.BackgroundTransparency = 1
+	Subtitle.Position = UDim2.new(0, 13, 0, 20)
+	Subtitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Subtitle.FontSize = Enum.FontSize.Size14
+	Subtitle.TextTransparency = 0.2
+	Subtitle.TextSize = 13
+	Subtitle.TextColor3 = theme.TextColor
+	Subtitle.Text = tostr(subtitle)
+	Subtitle.Font = Enum.Font.Gotham
+	Subtitle.TextXAlignment = Enum.TextXAlignment.Left
+	Subtitle.Parent = LeftSide
 	local idk = Instance.new('Frame')
 	idk.Name = 'idk'
 	idk.Size = UDim2.new(0, 126, 0, 2)
@@ -1606,9 +1606,9 @@ function Vernesity:Window(title1, title2, Theme)
 		end)
 	end
 
-	function Windows:Edit(newTitle1, newTitle2, newTheme)
+	function Windows:Edit(newTitle1, newSubtitle, newTheme)
 		Title.Text = tostr(newTitle1)
-		Title2.Text = tostr(newTitle2)
+		Subtitle.Text = tostr(newSubtitle)
 		WindowTemplate.Name = tostr(newTitle1)
 		theme = SetTheme(newTheme)
 		Windows:ChangeTheme(theme)
@@ -1618,12 +1618,12 @@ function Vernesity:Window(title1, title2, Theme)
 			table.insert(Windows, newTitle1)
 		end
 		title1 = newTitle1
-		title2 = newTitle2
+		subtitle = newSubtitle
 	end
 
 	function Windows:Remove()
 		title1 = nil
-		title2 = nil
+		subtitle = nil
 		WindowTemplate:Destroy()
 		local found = table.find(Windows, title1)
 		if found ~= nil then
