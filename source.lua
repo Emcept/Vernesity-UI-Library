@@ -52,14 +52,243 @@ local tostr = tostring
 local MainOriginalSize = UDim2.new(0, 486, 0, 300)
 local shadowTransparency = 1
 
+local UIParent = game.Players.LocalPlayer:WaitForChild('PlayerGui')
+local idklol = Instance.new('ScreenGui')
+pcall(function()
+	idklol.Parent = game.CoreGui
+end)
+if idklol.Parent == game.CoreGui then
+	UIParent = game.CoreGui
+end
+idklol:Destroy()
+
+local Load = true
+
+local function loadFunction()
+	if not Load then
+		repeat
+			task.wait()
+		until
+		Load
+	end
+	wait(1)
+end
+
+
+function Tween(instance, speed, style, direction, props)
+	game:GetService('TweenService'):Create(instance, TweenInfo.new(speed, style, direction), props):Play()
+end
+
+function Vernesity:EnableKeySystem(title, subtitle, note, key)
+	Load = false
+	local Vernesity_KeySystem = Instance.new("ScreenGui")
+	Vernesity_KeySystem.Name = "Vernesity_KeySystem"
+	Vernesity_KeySystem.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	Vernesity_KeySystem.ResetOnSpawn = false
+	local Main = Instance.new("Frame")
+	Main.Name = "Main"
+	Main.AnchorPoint = Vector2.new(0.5, 0.5)
+	Main.Size = UDim2.new(0, 0, 0, 0)
+	Main.ClipsDescendants = true
+	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Main.BackgroundColor3 = Color3.fromRGB(44, 47, 49)
+	Main.Parent = Vernesity_KeySystem
+	local UICorner = Instance.new("UICorner")
+	UICorner.CornerRadius = UDim.new(0, 5)
+	UICorner.Parent = Main
+	local Title = Instance.new("TextLabel")
+	Title.Name = "Title"
+	Title.Size = UDim2.new(0, 150, 0, 36)
+	Title.BackgroundTransparency = 1
+	Title.Position = UDim2.new(0, 13, 0, 0)
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.FontSize = Enum.FontSize.Size18
+	Title.TextSize = 15
+	Title.TextColor3 = Color3.fromRGB(235, 235, 235)
+	Title.TextTransparency = 1
+	Title.Text = tostr(title)
+	Title.Font = Enum.Font.GothamMedium
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+	Title.Parent = Main
+	local Note = Instance.new("TextLabel")
+	Note.Name = "Note"
+	Note.Size = UDim2.new(0, 355, 0, 55)
+	Note.BackgroundTransparency = 1
+	Note.Position = UDim2.new(0, 13, 0, 93)
+	Note.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Note.FontSize = Enum.FontSize.Size14
+	Note.TextTransparency = 1
+	Note.TextSize = 13
+	Note.TextColor3 = Color3.fromRGB(235, 235, 235)
+	Note.Text = tostr(note)
+	Note.TextYAlignment = Enum.TextYAlignment.Top
+	Note.TextWrapped = true
+	Note.Font = Enum.Font.GothamMedium
+	Note.TextWrap = true
+	Note.TextXAlignment = Enum.TextXAlignment.Left
+	Note.Parent = Main
+	local Title2 = Instance.new("TextLabel")
+	Title2.Name = "Title2"
+	Title2.Size = UDim2.new(0, 150, 0, 40)
+	Title2.BackgroundTransparency = 1
+	Title2.Position = UDim2.new(0, 13, 0, 20)
+	Title2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title2.FontSize = Enum.FontSize.Size14
+	Title2.TextTransparency = 1
+	Title2.TextSize = 13
+	Title2.TextColor3 = Color3.fromRGB(235, 235, 235)
+	Title2.Text = tostr(subtitle)
+	Title2.Font = Enum.Font.Gotham
+	Title2.TextXAlignment = Enum.TextXAlignment.Left
+	Title2.Parent = Main
+	local TextBox = Instance.new("TextBox")
+	TextBox.AnchorPoint = Vector2.new(0.8, 0.5)
+	TextBox.Size = UDim2.new(0, 150, 0, 21)
+	TextBox.Position = UDim2.new(0, 338, 0, 50)
+	TextBox.BackgroundTransparency = 1
+	TextBox.BackgroundColor3 = Color3.fromRGB(59, 62, 64)
+	TextBox.FontSize = Enum.FontSize.Size14
+	TextBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+	TextBox.TextSize = 14
+	TextBox.TextColor3 = Color3.fromRGB(235, 235, 235)
+	TextBox.TextTransparency = 1
+	TextBox.Text = ""
+	TextBox.CursorPosition = -1
+	TextBox.Font = Enum.Font.Gotham
+	TextBox.Parent = Main
+	local UICorner1 = Instance.new("UICorner")
+	UICorner1.CornerRadius = UDim.new(0, 5)
+	UICorner1.Parent = TextBox
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	UIStroke.Transparency = 1
+	UIStroke.Color = Color3.fromRGB(53, 141, 236)
+	UIStroke.Parent = TextBox
+	local KeyLabel = Instance.new("TextLabel")
+	KeyLabel.Name = "KeyLabel"
+	KeyLabel.Size = UDim2.new(0, 30, 0, 10)
+	KeyLabel.BackgroundTransparency = 1
+	KeyLabel.Position = UDim2.new(0, 218, 0, 20)
+	KeyLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	KeyLabel.FontSize = Enum.FontSize.Size14
+	KeyLabel.TextTransparency = 1
+	KeyLabel.TextSize = 13
+	KeyLabel.TextColor3 = Color3.fromRGB(235, 235, 235)
+	KeyLabel.Text = "Key"
+	KeyLabel.Font = Enum.Font.GothamBold
+	KeyLabel.TextXAlignment = Enum.TextXAlignment.Left
+	KeyLabel.Parent = Main
+	local NoteLabel = Instance.new("TextLabel")
+	NoteLabel.Name = "NoteLabel"
+	NoteLabel.Size = UDim2.new(0, 35, 0, 10)
+	NoteLabel.BackgroundTransparency = 1
+	NoteLabel.Position = UDim2.new(0, 13, 0, 73)
+	NoteLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	NoteLabel.FontSize = Enum.FontSize.Size14
+	NoteLabel.TextTransparency = 1
+	NoteLabel.TextSize = 13
+	NoteLabel.TextColor3 = Color3.fromRGB(235, 235, 235)
+	NoteLabel.Text = "Note"
+	NoteLabel.Font = Enum.Font.GothamBold
+	NoteLabel.TextXAlignment = Enum.TextXAlignment.Left
+	NoteLabel.Parent = Main
+	local Close = Instance.new("ImageButton")
+	Close.Name = "Close"
+	Close.LayoutOrder = 4
+	Close.ZIndex = 2
+	Close.AnchorPoint = Vector2.new(0.98, 0.5)
+	Close.Size = UDim2.new(0, 22, 0, 22)
+	Close.BackgroundTransparency = 1
+	Close.Position = UDim2.new(0, 376, 0, 16)
+	Close.ImageColor3 = Color3.fromRGB(235, 235, 235)
+	Close.ImageTransparency = 1
+	Close.ImageRectOffset = Vector2.new(284, 4)
+	Close.Image = "rbxassetid://3926305904"
+	Close.ImageRectSize = Vector2.new(24, 24)
+	Close.Parent = Main
+	Vernesity:MakeDraggable(Main)
+	Vernesity_KeySystem.Parent = UIParent
+	local speed = .5
+	Tween(Main, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+		Size = UDim2.new(0, 381, 0, 158)
+	})
+	wait(speed/2)
+	Tween(NoteLabel, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+		TextTransparency = 0.1
+	})
+	Tween(Note, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+		TextTransparency = 0.2
+	})
+	Tween(KeyLabel, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+		TextTransparency = 0.1
+	})
+	Tween(Close, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+		ImageTransparency = 0.1
+	})
+	Tween(TextBox, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+		TextTransparency = 0.1,
+		BackgroundTransparency = 0
+	})
+	Tween(Title, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+		TextTransparency = 0
+	})
+	Tween(Title2, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+		TextTransparency = 0.2
+	})
+	local function close()
+		Tween(NoteLabel, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+			TextTransparency = 1
+		})
+		Tween(Note, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+			TextTransparency = 1
+		})
+		Tween(KeyLabel, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+			TextTransparency = 1
+		})
+		Tween(Close, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+			ImageTransparency = 1
+		})
+		Tween(TextBox, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+			TextTransparency = 1,
+			BackgroundTransparency = 1
+		})
+		Tween(Title, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+			TextTransparency = 1
+		})
+		Tween(Title2, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+			TextTransparency = 1
+		})
+		wait(speed/2)
+		Tween(Main, speed, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+			Size = UDim2.new(0, 0, 0, 0)
+		})
+		wait(speed)
+		Vernesity_KeySystem:Destroy()
+	end
+	Close.MouseButton1Click:Connect(function()
+		close()
+	end)
+	TextBox.Focused:Connect(function()
+		Tween(UIStroke, .5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+			Transparency = 0
+		})
+	end)
+	TextBox.FocusLost:Connect(function()
+		Tween(UIStroke, .5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, {
+			Transparency = 1
+		})
+		wait(.2)
+		if TextBox.Text == key then
+			Load = true
+			close()
+		end
+	end)
+end
+
 function Vernesity:AddTheme(ThemeName, THEME)
 	if THEME.TextColor and THEME.WindowColor and THEME.TabColor and THEME.ElementColor and THEME.SecondaryElementColor then
 		Vernesity.Themes[ThemeName] = THEME
 	end
-end
-
-function Tween(instance, speed, style, direction, props)
-	game:GetService('TweenService'):Create(instance, TweenInfo.new(speed, style, direction), props):Play()
 end
 
 function checkDevice()
@@ -92,15 +321,6 @@ end
 local conns = {}
 local module = {}
 local dragging = false
-local UIParent = game.Players.LocalPlayer.PlayerGui
-local idklol = Instance.new('ScreenGui')
-pcall(function()
-	idklol.Parent = game.CoreGui
-end)
-if idklol.Parent == game.CoreGui then
-	UIParent = game.CoreGui
-end
-idklol:Destroy()
 
 function Vernesity:MakeDraggable(obj, Dragger, smoothness)
 	local UIS = game:GetService('UserInputService')
@@ -161,6 +381,7 @@ function Vernesity:MakeDraggable(obj, Dragger, smoothness)
 end
 
 function Vernesity:Window(title1, title2, Theme)
+	loadFunction()
 	local DragNumber = 0
 	local theme = Theme or Vernesity.Themes.DarkTheme
 	local selectedTab = nil
@@ -210,7 +431,7 @@ function Vernesity:Window(title1, title2, Theme)
 			Circle.ImageTransparency = 0.600
 			Circle.ImageTransparency = .7
 			g.ClipsDescendants = true
-			local len, size = 1, nil
+			local len, size = .85, nil
 			local c = Circle
 			local x, y = (ms.X - c.AbsolutePosition.X), (ms.Y - c.AbsolutePosition.Y)
 			c.Position = UDim2.new(0, x, 0, y)
@@ -318,7 +539,7 @@ function Vernesity:Window(title1, title2, Theme)
 	Title2.Position = UDim2.new(0, 13, 0, 20)
 	Title2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Title2.FontSize = Enum.FontSize.Size14
-	Title2.TextTransparency = 0.3
+	Title2.TextTransparency = 0.2
 	Title2.TextSize = 13
 	Title2.TextColor3 = theme.TextColor
 	Title2.Text = tostr(title2)
@@ -513,154 +734,154 @@ function Vernesity:Window(title1, title2, Theme)
 	function Windows:ChangeTheme(newtheme)
 		newtheme = SetTheme(newtheme)
 		theme = newtheme
-		for i, v in pairs(WindowTemplate:FindFirstChild('Mobile_Keybinds'):GetChildren()) do
-			task.spawn(function()
-				if v.ClassName == 'Frame' then
-					v.BackgroundColor3 = theme.ElementColor
-				end
-			end)
-		end
-
-		for i, v in pairs(WindowTemplate:FindFirstChild('Notifications'):GetChildren()) do
-			task.spawn(function()
-				if v.ClassName == 'Frame' then
-					v.BackgroundColor3 = theme.WindowColor
-					v:FindFirstChild('Bar').BackgroundColor3 = theme.SecondaryElementColor
-					for a, b in pairs(v:GetChildren()) do
-						task.spawn(function()
-							if b.ClassName == 'TextButton' then
-								b.BackgroundColor3 = theme.ElementColor
-							end
-						end)
-					end
-				end
-			end)
-		end
-
-		if WindowTemplate:FindFirstChild('UI') then
-			local ui = WindowTemplate:FindFirstChild('UI')
-			ui.BackgroundColor3 = theme.WindowColor
-			ui:FindFirstChild('DropShadow').ImageColor3 = theme.SecondaryElementColor
-			ui:FindFirstChild('DropShadow'):FindFirstChild('Main').BackgroundColor3 = theme.WindowColor
-			ui:FindFirstChild('DropShadow'):FindFirstChild('Main'):FindFirstChild('Topbar').BackgroundColor3 = theme.WindowColor
-			ui:FindFirstChild('DropShadow'):FindFirstChild('Main'):FindFirstChild('LeftSide'):FindFirstChild('idk').BackgroundColor3 = theme.SecondaryElementColor
-			ui:FindFirstChild('DropShadow'):FindFirstChild('Main'):FindFirstChild('Dragger').BackgroundColor3 = theme.WindowColor
-			ui:FindFirstChild('DropShadow'):FindFirstChild('Main'):FindFirstChild('Topbar'):FindFirstChild('b_SearchBox').BackgroundColor3 = theme.ElementColor
-			for i, v in pairs(WindowTemplate:GetDescendants()) do
+		pcall(function()
+			for i, v in pairs(WindowTemplate:FindFirstChild('Mobile_Keybinds'):GetChildren()) do
 				task.spawn(function()
-					if v.ClassName == 'TextBox' or v.ClassName == 'TextButton' or v.ClassName == 'TextLabel' then
-						v.TextColor3 = theme.TextColor
+					if v.ClassName == 'Frame' then
+						v.BackgroundColor3 = theme.ElementColor
 					end
-					if v.ClassName == 'UIStroke' then
-						if v.Parent.Name == 'Marker' then
-							v.Color = theme.WindowColor
-						else
-							v.Color = theme.SecondaryElementColor
-						end
-					end
-					if v.ClassName == 'ImageLabel' or v.ClassName == 'ImageButton' then
-						if v.Name == 'CoolValue' or v.Name == 'RGB' or v.Name == 'DropShadow' or v.Name == 'ResizeButton' then
-						else
-							v.ImageColor3 = theme.TextColor
-						end
-						if v.Name == 'DropShadow' then
-							v.ImageColor3 = theme.SecondaryElementColor
-						end
-					end
-					if v.ClassName == 'RayValue' then
-						local obj = v.Parent
-						if v.Name == 'Tab' then
-							obj.BackgroundColor3 = theme.TabColor
-						end
-						if v.Name == 'Button' then
-							obj.BackgroundColor3 = theme.ElementColor
-						end
-						if v.Name == 'Label' then
-							obj.BackgroundColor3 = theme.ElementColor
-						end
-						if v.Name == 'Interactable' then
-							obj.BackgroundColor3 = theme.ElementColor
-							for i, v in pairs(obj:GetChildren()) do
-								task.spawn(function()
-									if v.ClassName == 'TextButton' and v.Name == 'Interactable' then
-										v.BackgroundColor3 = theme.SecondaryElementColor
-									end
-								end)
-							end
-						end
-						if v.Name == 'Paragraph' then
-							obj.BackgroundColor3 = theme.ElementColor
-						end
-						if v.Name == 'TextBox' then
-							obj.BackgroundColor3 = theme.ElementColor
-							for i, v in pairs(obj:GetChildren()) do
-								task.spawn(function()
-									if v.ClassName == 'TextBox' and v.Name == 'TextBox' then
-										v.BackgroundColor3 = theme.WindowColor
-									end
-								end)
-							end
-						end
-						if v.Name == 'Slider' then
-							obj.BackgroundColor3 = theme.ElementColor
-							for i, v in pairs(obj:GetChildren()) do
-								task.spawn(function()
-									if v.ClassName == 'TextButton' and v.Name == 'Slider' then
-										v.BackgroundColor3 = theme.WindowColor
-										v:FindFirstChild('Bar').BackgroundColor3 = theme.SecondaryElementColor
-									end
-								end)
-							end
-						end
-						if v.Name == 'Keybind' then
-							obj.BackgroundColor3 = theme.ElementColor
-							for i, v in pairs(obj:GetChildren()) do
-								task.spawn(function()
-									if v.ClassName == 'TextButton' or v.ClassName == 'TextBox' then
-										if v.Name == 'Keybind' then
-											v.BackgroundColor3 = theme.WindowColor
-										end
-									end
-								end)
-							end
-						end
-						if v.Name == 'Dropdown' then
-							obj.BackgroundColor3 = theme.ElementColor
-							obj:FindFirstChild('Buttons'):FindFirstChild('SearchBox').BackgroundColor3 = theme.WindowColor
-						end
-						if v.Name == 'ColorPicker' then
-							obj.BackgroundColor3 = theme.ElementColor
-							obj:FindFirstChild('ApplyButton').BackgroundColor3 = theme.SecondaryElementColor
-						end
-						if v.Name == 'Toggle' then
-							obj.BackgroundColor3 = theme.ElementColor
-							for i, v in pairs(obj:GetChildren()) do
-								task.spawn(function()
-									if v.ClassName == 'Frame' and v.Name == 'Toggle' then
-										v.BackgroundColor3 = theme.WindowColor
-									end
-								end)
-							end
-						end
-						if v.Name == 'Switch' then
-							obj.BackgroundColor3 = theme.ElementColor
-							for i, v in pairs(obj:GetChildren()) do
-								task.spawn(function()
-									if v.ClassName == 'Frame' and v.Name == 'Switch' then
-										v:FindFirstChild('Circle').BackgroundColor3 = theme.TextColor
-										if obj:FindFirstChild("Toggled").Value then
-											v.BackgroundColor3 = theme.SecondaryElementColor
-										else
-											v.BackgroundColor3 = theme.WindowColor
-										end
-									end
-								end)
-							end
+				end)
+			end
+			for i, v in pairs(WindowTemplate:FindFirstChild('Notifications'):GetChildren()) do
+				task.spawn(function()
+					if v.ClassName == 'Frame' then
+						v.BackgroundColor3 = theme.WindowColor
+						v:FindFirstChild('Bar').BackgroundColor3 = theme.SecondaryElementColor
+						for a, b in pairs(v:GetChildren()) do
+							task.spawn(function()
+								if b.ClassName == 'TextButton' then
+									b.BackgroundColor3 = theme.ElementColor
+								end
+							end)
 						end
 					end
 				end)
 			end
-		end
+			if WindowTemplate:FindFirstChild('UI') then
+				local ui = WindowTemplate:FindFirstChild('UI')
+				ui.BackgroundColor3 = theme.WindowColor
+				ui:FindFirstChild('DropShadow').ImageColor3 = theme.SecondaryElementColor
+				ui:FindFirstChild('DropShadow'):FindFirstChild('Main').BackgroundColor3 = theme.WindowColor
+				ui:FindFirstChild('DropShadow'):FindFirstChild('Main'):FindFirstChild('Topbar').BackgroundColor3 = theme.WindowColor
+				ui:FindFirstChild('DropShadow'):FindFirstChild('Main'):FindFirstChild('LeftSide'):FindFirstChild('idk').BackgroundColor3 = theme.SecondaryElementColor
+				ui:FindFirstChild('DropShadow'):FindFirstChild('Main'):FindFirstChild('Dragger').BackgroundColor3 = theme.WindowColor
+				ui:FindFirstChild('DropShadow'):FindFirstChild('Main'):FindFirstChild('Topbar'):FindFirstChild('b_SearchBox').BackgroundColor3 = theme.ElementColor
+				for i, v in pairs(WindowTemplate:GetDescendants()) do
+					task.spawn(function()
+						if v.ClassName == 'TextBox' or v.ClassName == 'TextButton' or v.ClassName == 'TextLabel' then
+							v.TextColor3 = theme.TextColor
+						end
+						if v.ClassName == 'UIStroke' then
+							if v.Parent.Name == 'Marker' then
+								v.Color = theme.WindowColor
+							else
+								v.Color = theme.SecondaryElementColor
+							end
+						end
+						if v.ClassName == 'ImageLabel' or v.ClassName == 'ImageButton' then
+							if v.Name == 'CoolValue' or v.Name == 'RGB' or v.Name == 'DropShadow' or v.Name == 'ResizeButton' then
+							else
+								v.ImageColor3 = theme.TextColor
+							end
+							if v.Name == 'DropShadow' then
+								v.ImageColor3 = theme.SecondaryElementColor
+							end
+						end
+						if v.ClassName == 'RayValue' then
+							local obj = v.Parent
+							if v.Name == 'Tab' then
+								obj.BackgroundColor3 = theme.TabColor
+							end
+							if v.Name == 'Button' then
+								obj.BackgroundColor3 = theme.ElementColor
+							end
+							if v.Name == 'Label' then
+								obj.BackgroundColor3 = theme.ElementColor
+							end
+							if v.Name == 'Interactable' then
+								obj.BackgroundColor3 = theme.ElementColor
+								for i, v in pairs(obj:GetChildren()) do
+									task.spawn(function()
+										if v.ClassName == 'TextButton' and v.Name == 'Interactable' then
+											v.BackgroundColor3 = theme.SecondaryElementColor
+										end
+									end)
+								end
+							end
+							if v.Name == 'Paragraph' then
+								obj.BackgroundColor3 = theme.ElementColor
+							end
+							if v.Name == 'TextBox' then
+								obj.BackgroundColor3 = theme.ElementColor
+								for i, v in pairs(obj:GetChildren()) do
+									task.spawn(function()
+										if v.ClassName == 'TextBox' and v.Name == 'TextBox' then
+											v.BackgroundColor3 = theme.WindowColor
+										end
+									end)
+								end
+							end
+							if v.Name == 'Slider' then
+								obj.BackgroundColor3 = theme.ElementColor
+								for i, v in pairs(obj:GetChildren()) do
+									task.spawn(function()
+										if v.ClassName == 'TextButton' and v.Name == 'Slider' then
+											v.BackgroundColor3 = theme.WindowColor
+											v:FindFirstChild('Bar').BackgroundColor3 = theme.SecondaryElementColor
+										end
+									end)
+								end
+							end
+							if v.Name == 'Keybind' then
+								obj.BackgroundColor3 = theme.ElementColor
+								for i, v in pairs(obj:GetChildren()) do
+									task.spawn(function()
+										if v.ClassName == 'TextButton' or v.ClassName == 'TextBox' then
+											if v.Name == 'Keybind' then
+												v.BackgroundColor3 = theme.WindowColor
+											end
+										end
+									end)
+								end
+							end
+							if v.Name == 'Dropdown' then
+								obj.BackgroundColor3 = theme.ElementColor
+								obj:FindFirstChild('Buttons'):FindFirstChild('SearchBox').BackgroundColor3 = theme.WindowColor
+							end
+							if v.Name == 'ColorPicker' then
+								obj.BackgroundColor3 = theme.ElementColor
+								obj:FindFirstChild('ApplyButton').BackgroundColor3 = theme.SecondaryElementColor
+							end
+							if v.Name == 'Toggle' then
+								obj.BackgroundColor3 = theme.ElementColor
+								for i, v in pairs(obj:GetChildren()) do
+									task.spawn(function()
+										if v.ClassName == 'Frame' and v.Name == 'Toggle' then
+											v.BackgroundColor3 = theme.WindowColor
+										end
+									end)
+								end
+							end
+							if v.Name == 'Switch' then
+								obj.BackgroundColor3 = theme.ElementColor
+								for i, v in pairs(obj:GetChildren()) do
+									task.spawn(function()
+										if v.ClassName == 'Frame' and v.Name == 'Switch' then
+											v:FindFirstChild('Circle').BackgroundColor3 = theme.TextColor
+											if obj:FindFirstChild("Toggled").Value then
+												v.BackgroundColor3 = theme.SecondaryElementColor
+											else
+												v.BackgroundColor3 = theme.WindowColor
+											end
+										end
+									end)
+								end
+							end
+						end
+					end)
+				end
+			end
+		end)
 	end
 	local searching = false
 	c_Search.MouseButton1Click:Connect(function()
@@ -1913,9 +2134,9 @@ function Vernesity:Window(title1, title2, Theme)
 				viewInfo.Parent = InteractableTemplate
 				local Interactable = Instance.new('TextButton')
 				Interactable.Name = 'Interactable'
-				Interactable.AnchorPoint = Vector2.new(0.83, 0.5)
-				Interactable.Size = UDim2.new(0, 75, 0, 25)
-				Interactable.Position = UDim2.new(0.83, 0, 0, 20)
+				Interactable.AnchorPoint = Vector2.new(0.82, 0.5)
+				Interactable.Size = UDim2.new(0, 72, 0, 22)
+				Interactable.Position = UDim2.new(0.82, 0, 0, 20)
 				Interactable.BackgroundColor3 = theme.SecondaryElementColor
 				Interactable.AutoButtonColor = false
 				Interactable.FontSize = Enum.FontSize.Size14
@@ -2179,6 +2400,20 @@ function Vernesity:Window(title1, title2, Theme)
 				ViewInfo.ImageRectSize = Vector2.new(36, 36)
 				ViewInfo.Parent = viewInfo
 				viewInfo.Parent = TextBoxTemplate
+				local Button = Instance.new('TextButton')
+				Button.Name = 'Button'
+				Button.Size = setElementSizeX(UDim2.new(0, 328, 0, 40))
+				Button.BackgroundTransparency = 1
+				Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Button.FontSize = Enum.FontSize.Size14
+				Button.TextSize = 14
+				Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+				Button.Text = ''
+				Button.Font = Enum.Font.SourceSans
+				Button.Parent = TextBoxTemplate
+				local Value1 = Instance.new('StringValue')
+				Value1.Value = 'X'
+				Value1.Parent = Button
 				local TextBox = Instance.new('TextBox')
 				TextBox.Name = 'TextBox'
 				TextBox.AnchorPoint = Vector2.new(0.8, 0.5)
@@ -2223,7 +2458,6 @@ function Vernesity:Window(title1, title2, Theme)
 				Value3.Value = 'X'
 				Value3.Parent = TextBoxTemplate
 				TextBoxTemplate.Parent = SectionTemplate
-				enableRippleEffect(viewInfo, TextBoxTemplate)
 				TextBox.FocusLost:Connect(function()
 					FUNC(TextBox.Text)
 					Tween(UIStroke, 0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
@@ -2237,7 +2471,7 @@ function Vernesity:Window(title1, title2, Theme)
 				end)
 				local f, idk = false, 0.45
 				local style, dir = Enum.EasingStyle.Quad, Enum.EasingDirection.InOut
-				viewInfo.MouseButton1Click:Connect(function()
+				Button.MouseButton1Click:Connect(function()
 					f = not f
 					if f then
 						Tween(TextBoxTemplate, idk, style, dir, {
@@ -2431,7 +2665,6 @@ function Vernesity:Window(title1, title2, Theme)
 				Value5.Value = 'X'
 				Value5.Parent = SliderTemplate
 				SliderTemplate.Parent = SectionTemplate
-				enableRippleEffect(Button)
 				local bar = Bar
 				local textbox = SliderValue
 				local mouse = game.Players.LocalPlayer:GetMouse()
@@ -3042,8 +3275,8 @@ function Vernesity:Window(title1, title2, Theme)
 						})
 					end
 				end
-				Button2.MouseButton1Click:Connect(a)
-				ToggleBtn.MouseButton1Click:Connect(function()
+				viewInfo.MouseButton1Click:Connect(a)
+				Button2.MouseButton1Click:Connect(function()
 					Toggled = not Toggled
 					FUNC(Toggled)
 					if Toggled then
@@ -3706,12 +3939,19 @@ function Vernesity:Window(title1, title2, Theme)
 				UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 				UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 				UIListLayout.Parent = Objects
+				local view_info = Instance.new("CanvasGroup")
+				view_info.Name = "viewInfo"
+				view_info.AnchorPoint = Vector2.new(1, 0)
+				view_info.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				view_info.BackgroundTransparency = 1
+				view_info.Position = UDim2.new(1, 0, 0, 0)
+				view_info.Size = UDim2.new(0, 43, 0, 40)
 				local viewInfo = Instance.new("TextButton")
 				viewInfo.Name = "viewInfo"
-				viewInfo.AnchorPoint = Vector2.new(1, 0)
+				viewInfo.AnchorPoint = Vector2.new(0, 0)
 				viewInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				viewInfo.BackgroundTransparency = 1
-				viewInfo.Position = UDim2.new(1, 0, 0, 0)
+				viewInfo.Position = UDim2.new(0, 0, 0, 0)
 				viewInfo.Size = UDim2.new(0, 43, 0, 40)
 				viewInfo.Font = Enum.Font.SourceSans
 				viewInfo.Text = ""
@@ -3731,8 +3971,9 @@ function Vernesity:Window(title1, title2, Theme)
 				DropdownButton.Image = 'rbxassetid://3926307971'
 				DropdownButton.ImageColor3 = theme.TextColor
 				DropdownButton.Parent = viewInfo
-				viewInfo.Parent = DropdownTemplate
-				local Buttons = Instance.new('CanvasGroup')
+				viewInfo.Parent = view_info
+				view_info.Parent = DropdownTemplate
+				local Buttons = Instance.new('Frame')
 				Buttons.Name = 'Buttons'
 				Buttons.Size = setElementSizeX(UDim2.new(0, 328, 0, 40))
 				Buttons.BackgroundTransparency = 1
@@ -4089,14 +4330,18 @@ function Vernesity:Window(title1, title2, Theme)
 				local playerList = Section:Dropdown(name, plrtable, plrtable[1], func)
 				game.Players.PlayerAdded:Connect(function(player)
 					if run then
-						table.insert(plrtable, player.Name)
-						playerList:Edit(name, plrtable, plrtable[1], func)
+						pcall(function()
+							table.insert(plrtable, player.Name)
+							playerList:Edit(name, plrtable, plrtable[1], func)
+						end)
 					end
 				end)
 				game.Players.PlayerRemoving:Connect(function(player)
 					if run then
-						table.remove(plrtable, table.find(plrtable, player.Name))
-						playerList:Edit(name, plrtable, plrtable[1], func)
+						pcall(function()
+							table.remove(plrtable, table.find(plrtable, player.Name))
+							playerList:Edit(name, plrtable, plrtable[1], func)
+						end)
 					end
 				end)
 				function playerlist:Edit(newName, newFunc)
