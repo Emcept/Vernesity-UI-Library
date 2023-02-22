@@ -11,7 +11,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Emcep
 
 ## Adding Key System
 ```Lua
-Library:EnableKeySystem(<Title>, '<Subtitle>', '<Note>', <Key>)
+Library:EnableKeySystem(<Title>, <Subtitle>, <Note>, <Key>)
 ```
 
 <br />
