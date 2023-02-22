@@ -2674,6 +2674,7 @@ function Vernesity:Window(title1, subtitle, Theme)
 				local minval = minvalue
 				local maxval = maxvalue
 				local percentage = 0
+				local e = true
 				if maxval == 0 then
 					maxval = 1 / string.rep(9e9*9e9, 10)
 				end
@@ -2688,6 +2689,9 @@ function Vernesity:Window(title1, subtitle, Theme)
 					task.wait(0.06)
 					percentage = math.floor(((bar.Size.X.Scale * maxval) / maxval) * (maxval - minval) + minval)
 					textbox.Text = percentage
+					if e then
+						FUNC(percentage)
+					end
 				end)
 				game:GetService('UserInputService').InputEnded:Connect(function(input, gp)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -2702,6 +2706,9 @@ function Vernesity:Window(title1, subtitle, Theme)
 						task.wait(0.06)
 						percentage = math.floor(((bar.Size.X.Scale * maxval) / maxval) * (maxval - minval) + minval)
 						textbox.Text = percentage
+						if e then
+							FUNC(percentage)
+						end
 					end
 				end)
 				textbox.FocusLost:Connect(function()
@@ -2710,15 +2717,12 @@ function Vernesity:Window(title1, subtitle, Theme)
 						Tween(bar, 0.05, Enum.EasingStyle.Linear, Enum.EasingDirection.In, {
 							Size = UDim2.new((textbox.Text - minval) / (maxval - minval), 0, 1, 0)
 						})
+						if e then
+							FUNC(percentage)
+						end
 					else
 						warn('Please enter a number')
 						textbox.Text = percentage
-					end
-				end)
-				local e = true
-				textbox:GetPropertyChangedSignal('Text'):Connect(function()
-					if e then
-						FUNC(percentage)
 					end
 				end)
 				local f, idk = false, 0.45
