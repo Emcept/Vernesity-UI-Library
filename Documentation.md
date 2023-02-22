@@ -9,6 +9,13 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Emcep
 ```
 <br />
 
+## Adding Key System
+```Lua
+Library:EnableKeySystem(<Title>, '<Subtitle>', '<Note>', <Key>)
+```
+
+<br />
+
 ## Creating a Window
 ```Lua
 local Window = Library:Window(<Title>, <Subtitle>, <Theme (optional)>)
@@ -240,7 +247,7 @@ end)
 ## EXAMPLE CODE:
 ```Lua
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Emcept/Vernesity-UI-Library/main/source.lua"))()
-Library:EnableKeySystem('Vernesity', 'Key System', 'Note here', '1234')
+Library:EnableKeySystem('Title', 'Key System', 'Note here', '1234')
 local Window = Library:Window('Vernesity', 'Game Name', 'DarkTheme')
 local Tab = Window:Tab('Tab 1')
 local SettingsTab = Window:Tab('Settings', 10846926154)
