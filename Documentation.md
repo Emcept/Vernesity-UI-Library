@@ -11,7 +11,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Emcep
 
 ## Creating a Window
 ```Lua
-local Window = Library:Window(<Title>, <Game Name>, <Theme (optional)>)
+local Window = Library:Window(<Title>, <Subtitle>, <Theme (optional)>)
 ```
 <br />
 
@@ -29,7 +29,7 @@ local Window = Library:Window(<Title>, <Game Name>, <Theme (optional)>)
 ```Lua
 Window:Notify(<Title>, <Description>, <Arguments Table>, <Duration>, <Func>)
 ```
-### The arguments table should be 0-2 strings or 0-2 numbers if you want to use images instead of normal buttons
+### The arguments in the table should be 0-2 strings or 0-2 numbers if you want to use images instead of normal buttons
 #### For example, this would create a notification with 2 Buttons
 ```Lua
 Window:Notify("Question", "Do you like this UI Library?", {"Yes", "No"}, 5, function(Text)
@@ -198,7 +198,7 @@ Windows:SetShadowTransparency(<Number 0-1>)
 ### Example:
 ```Lua
 local Window = Library:Window("Vernesity", "Game Name", "DarkTheme")
-Window:Edit("New Title", "New Game Name", "PurpleTheme")
+Window:Edit("New Title", "New Subtitle", "PurpleTheme")
 ```
 <br /><br />
 
