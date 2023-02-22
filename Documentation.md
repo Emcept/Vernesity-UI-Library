@@ -240,54 +240,58 @@ end)
 ## EXAMPLE CODE:
 ```Lua
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Emcept/Vernesity-UI-Library/main/source.lua"))()
-local Window = Library:Window("Title", "Subtitle", "DarkTheme")
-local Tab = Window:Tab("Tab 1")
-local SettingsTab = Window:Tab("Settings", 10846926154)
-local Section = Tab:Section("Main")
-local Button = Section:Button("Button", "Desc", function()
-print("Clicked")
+Library:EnableKeySystem('Vernesity', 'Key System', 'Note here', '1234')
+local Window = Library:Window('Vernesity', 'Game Name', 'DarkTheme')
+local Tab = Window:Tab('Tab 1')
+local SettingsTab = Window:Tab('Settings', 10846926154)
+local Section = Tab:Section('Main')
+local Button = Section:Button('Button', 'Desc', function()
+	print('Clicked')
 end)
-local Label = Section:Label("Label")
-local TextBox = Section:TextBox("TextBox", "Desc", "Type here...", function(text)
-    print("You typed:", text)
+local Label = Section:Label('Label')
+local TextBox = Section:TextBox('TextBox', 'Desc', 'Type here...', function(text)
+	print('You typed:', text)
 end)
-local Dropdown = Section:Dropdown("Dropdown", {"Option 1", "Option 2"}, "Select...", function(selectedOption)
-    print(selectedOption)
+local Interactable = Section:Interactable('Interactable', 'Desc', 'Click Me!', function()
+	print('Clicked!')
 end)
-local Switch = Section:Switch("Switch", "Desc", true, function(state)
-    if state then
-        print("On")
-    else
-        print("Off")
-    end
+local Dropdown = Section:Dropdown('Dropdown', {'Option 1', 'Option 2'}, 'Select...', function(selectedOption)
+	print(selectedOption)
 end)
-local Toggle = Section:Toggle("Toggle", "Desc", true, function(state)
-    if state then
-        print("On")
-    else
-        print("Off")
-    end
+local Switch = Section:Switch('Switch', 'Desc', true, function(state)
+	if state then
+		print('On')
+	else
+		print('Off')
+	end
 end)
-local Slider = Section:Slider("WalkSpeed", "Desc", 0, 100, 16, function(speed)
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed
+local Toggle = Section:Toggle('Toggle', 'Desc', true, function(state)
+	if state then
+		print('On')
+	else
+		print('Off')
+	end
 end)
-local Keybind = Section:Keybind("Keybind", "Desc", "F", function()
-    print("Pressed the keybind!")
+local Slider = Section:Slider('WalkSpeed', 'Desc', 0, 100, 16, function(speed)
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed
 end)
-
-Window:Notify("Question", "Do you like this UI Library?", {"Yes", "No"}, 5, function(Text)
-if Text == "Yes" then
-    print("Thank you!")
-else
-    print(":(")
-    end
+local Keybind = Section:Keybind('Keybind', 'Desc', 'F', function()
+	print('Pressed the keybind!')
 end)
 
-local settingsSection = SettingsTab:Section("Settings")
+Window:Notify('Question', 'Do you like this UI Library?', {'Yes', 'No'}, 5, function(Text)
+	if Text == 'Yes' then
+		print('Thank you!')
+	else
+		print(':(')
+	end
+end)
+
+local settingsSection = SettingsTab:Section('Settings')
 
 local theme = Window:GetTheme()
 for i, v in pairs(theme) do
-	settingsSection:ColorPicker(i, "Changes "..i.."'s theme", v, function(color3)
+	settingsSection:ColorPicker(i, "Changes "..i, v, function(color3)
 		theme = Window:GetTheme()
 		theme[i] = color3
 		Window:ChangeTheme(theme)
@@ -300,8 +304,8 @@ end)
 Window:OnMinimize(function(state)
 	print('Minimized:', state)
 end)
-	
-local PlayerList = Section:PlayerList("PlayerList", function(plr)
+
+local PlayerList = Section:PlayerList('PlayerList', function(plr)
 	print(plr)
 end)
 ```
