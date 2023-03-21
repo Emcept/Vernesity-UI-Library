@@ -1,5 +1,5 @@
 # Vernesity UI Library
-## Version 2 coming soon (maybe)
+## Version 2 coming soon
 ### Made by Emmy#4846
 
 <br />
