@@ -1030,6 +1030,7 @@ function Vernesity:Window(title1, subtitle, Theme)
 				})
 			end
 		end
+		wait(0.9)
 	end)
 
 	local j = 0.5
