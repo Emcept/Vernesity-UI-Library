@@ -1,6 +1,6 @@
 # Vernesity UI Library
 ## Version 2 is out! https://github.com/Emcept/Vernesity-V2
-### Made by Emmy#4846
+### Made by Emmy (Discord: emcept)
 
 <br />
 
